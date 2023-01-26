@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # ---> VisualStudioCode
 .vscode/*
 !.vscode/settings.json
@@ -35,9 +33,8 @@ tags
 # Persistent undo
 [._]*.un~
 
->>>>>>> 89728fec23ff6769de194676762b0b62268ea967
 node_modules/
-.expo/
+#.expo/
 dist/
 npm-debug.*
 *.jks
@@ -47,10 +44,6 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-<<<<<<< HEAD
 
-=======
-node_modules/
->>>>>>> 89728fec23ff6769de194676762b0b62268ea967
 # macOS
 .DS_Store
