@@ -16,16 +16,20 @@ export default function App() {
         <Icon name='settings' size={45}></Icon>
       </View>*/}
 
+
+      {/* ! CHANGER:
+      Passer de colonnes a iconnes afin d'aligner chaque attribut
+      colonne logo, labe et button */}
       <View style={styles.options}>
         <View style={styles.settingRow}>
-          <Icon name='globe-outline' size={65}></Icon>
+          <Icon name='globe-outline' size={60}></Icon>
           <Text style={{fontSize: 30, fontWeight: 'bold'}}>Language</Text>
           <Switch></Switch>
         </View>
 
         <View style={styles.settingRow}>
           <View style={styles.iconDecoration}>
-            <Icon name='moon' size={50}></Icon>
+            <Icon name='moon' size={45}></Icon>
           </View>
           <Text style={{fontSize: 30, fontWeight: 'bold'}}>Dark Mode</Text>
           <Switch></Switch>
@@ -33,7 +37,7 @@ export default function App() {
 
         <View style={styles.settingRow}>
           <Icon name='information-circle-outline' size={65}></Icon>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>Language</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>About us</Text>
           <Switch></Switch>
         </View>
       </View>
@@ -51,8 +55,8 @@ const styles = StyleSheet.create({
   },
 
   iconDecoration: {
-    height: 60,
-    width: 60,
+    height: 55,
+    width: 55,
     backgroundColor: 'white',
     borderRadius: 30,
     borderWidth: 3,
