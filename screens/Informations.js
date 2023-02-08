@@ -4,16 +4,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function InformationScreen() {
   return (
     <SafeAreaView style={{flex: 1, margin: 5}}>
-      
-      {/* TITLE */}
-      <View style={{flex: 0.15, alignItems: 'center'}}>
-        <Text style={styles.title}>INFORMATIONS</Text>
-      </View>
-
-        
+              
       <ScrollView style={{flex: 1}}>
           <View>
-            <Text style={styles.sectionTitle}>BlackJack : the game</Text>
             <View>
               <Image source={require('../assets/blackJack.png')} style={styles.image}/>
             </View>
@@ -41,15 +34,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontFamily: 'sans-serif-medium',
     margin: 20
-  },
-
-  sectionTitle: {
-    flex: 1,
-    fontSize: 20,
-    fontFamily: 'sans-serif-medium',
-    fontWeight: 'bold',
-    marginBottom: 5,
-    textDecorationLine: 'underline'
   },
   
   image: {

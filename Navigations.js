@@ -16,9 +16,9 @@ export default function Navigation() {
         <NavigationContainer>
             <BottomTabNavigator.Navigator initialRouteName="Home">
                 <BottomTabNavigator.Screen name="Home" component={HomeScreen}
-                                            options={{
-                                                title: 'Home',
-                                            }}/>
+                            options={{
+                                title: 'Home',
+                            }}/>
                 <BottomTabNavigator.Screen name="CheatSheet" component={CheatSheetScreen}
                             options={{
                                 title: 'CheatSheet',
