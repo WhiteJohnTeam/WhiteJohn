@@ -56,3 +56,9 @@ const styles = StyleSheet.create({
   }
 });
 
+// export const CARD_LIST : Card[] = [
+//   new Card(1,7,"hearts",""),
+//   new Card(2,8,"hearts",""),
+//   new Card(3,9,"hearts",""),
+// ]
+

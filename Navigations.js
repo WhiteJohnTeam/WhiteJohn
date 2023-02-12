@@ -10,6 +10,7 @@ import Information from './screens/Informations';
 import InformationScreen from './screens/Informations';
 
 
+
 export default function Navigation() {
     const BottomTabNavigator = createBottomTabNavigator();
     return (
