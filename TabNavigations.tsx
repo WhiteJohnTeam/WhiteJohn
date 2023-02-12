@@ -20,6 +20,11 @@ export default function Navigation() {
                                 title: 'Home',
                                 tabBarIcon: ({color}) => <Icon name="home" color={color}/>,
                             }}/>
+                <BottomTabNavigator.Screen name="Info" component={InformationScreen}
+                            options={{
+                                title: 'BlackJack',
+                                tabBarIcon: ({color}) => <Icon name="md-cash" color={color}/>,
+                            }}/>
                 <BottomTabNavigator.Screen name="CheatSheet" component={CheatSheetScreen}
                             options={{
                                 title: 'CheatSheet',
@@ -30,11 +35,7 @@ export default function Navigation() {
                                 title: 'Settings',
                                 tabBarIcon: ({color}) => <Icon name="settings" color={color}/>,
                             }}/>
-                <BottomTabNavigator.Screen name="Info" component={InformationScreen}
-                            options={{
-                                title: 'BlackJack',
-                                tabBarIcon: ({color}) => <Icon name="md-cash" color={color}/>,
-                            }}/>
+
                 </BottomTabNavigator.Navigator>
         </NavigationContainer>
     )
