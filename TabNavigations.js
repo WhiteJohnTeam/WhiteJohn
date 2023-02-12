@@ -40,11 +40,8 @@ export default function Navigation() {
                 </BottomTabNavigator.Navigator>
         </NavigationContainer>
     )
-}
 
-function TabBarIcon(props: {
-    name: React.ComponentProps<typeof Icon>['name'];
-    color: string;
-}) {
-    return <Icon size={30} {...props} />;
+    function TabBarIcon(props) {
+        return <Icon size={30} {...props} />;
+    }
 }

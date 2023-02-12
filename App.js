@@ -1,5 +1,5 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Navigation from './Navigations';
+import Navigation from './TabNavigations';
 import store from './redux/store';
 import { Provider } from 'react-redux';
 
