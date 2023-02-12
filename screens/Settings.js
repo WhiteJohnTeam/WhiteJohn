@@ -5,11 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function SettingsScreen() {
   return (
     <SafeAreaView style={{flex: 1, margin: 5}}>
-      
-      {/* TITLE */}
-      <View style={{flex: 0, alignItems: 'center'}}>
-        <Text style={styles.title}>SETTINGS</Text>
-      </View>
 
       {/* SETTING ICON 
       <View style={{position: 'absolute', top: 20, right: 20, marginTop: 15}}>
@@ -18,7 +13,7 @@ export default function SettingsScreen() {
 
 
       {/* ! CHANGER:
-      Passer de colonnes a iconnes afin d'aligner chaque attribut
+      Passer de colonnes a icônes afin d'aligner chaque attribut
       colonne logo, labe et button */}
       <View style={styles.options}>
         <View style={styles.settingRow}>
@@ -46,13 +41,6 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    flex: 1,
-    fontSize: 40,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-medium',
-    margin: 20
-  },
 
   // iconDecoration: {
   //   height: 55,

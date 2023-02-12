@@ -4,11 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function CheatSheetScreen() {
   return (
     <SafeAreaView style={{flex: 1, margin: 5}}>
-      
-      {/* TITLE */}
-      <View style={{flex: 0.15, alignItems: 'center'}}>
-        <Text style={styles.title}>CHEAT SHEET</Text>
-      </View>
     
       <ScrollView style={{flex: 1}}>
           <View>
@@ -23,13 +18,6 @@ export default function CheatSheetScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    flex: 1,
-    fontSize: 40,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-medium',
-    margin: 20
-  },
   
   textDescription: {
     alignItems: 'center',
