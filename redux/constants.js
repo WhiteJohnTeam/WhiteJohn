@@ -1,0 +1,2 @@
+export const FETCH_DECK = 'FETCH_DECK';
+export const FETCH_DECK_FAILED = 'FETCH_DECK_FAILED';
