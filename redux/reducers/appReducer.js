@@ -1,8 +1,7 @@
 import { FETCH_DECK } from "../constants"
-import { newGame } from "../actions/newGame";
 
 const initialState = {
-    game: null,
+    game: null
 }
 
 export default appReducer = (state = initialState, action) => {

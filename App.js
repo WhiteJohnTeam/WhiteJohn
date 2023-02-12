@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Navigation from './Navigations';
+import store from './redux/store';
+import { Provider } from 'react-redux';
 
 export default function App() {
   return (
-   <SafeAreaProvider>
-    <Navigation>
-    </Navigation>
-   </SafeAreaProvider>
+  <Provider store ={store}>
+    <SafeAreaProvider>
+      <Navigation>
+      </Navigation>
+    </SafeAreaProvider>
+  </Provider>
   );
 }

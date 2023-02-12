@@ -1,8 +1,13 @@
-class Game {
+export default class Game {
     constructor(deckId) {
-        this.deckId = deckId;
-        this.playerHand = [];
-        this.dealerHand = [];
+        console.warn("I am inside the constructor!")
+        try {
+            this.deckId = deckId;
+            this.playerHand = [];
+            this.dealerHand = [];
+          } catch (error) {
+            console.error(error);
+          }
     }
 
     Draw(card, who) {
@@ -10,5 +15,11 @@ class Game {
             this.playerHand.push(card);
         else
             this.dealerHand.push(card);
+    }
+
+    toObject() {
+        return {
+          deckId: this.deckId,
+        };
     }
 }
