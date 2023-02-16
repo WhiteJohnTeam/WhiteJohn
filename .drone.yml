@@ -22,4 +22,4 @@
         - unzip -o $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/
         - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
         - export SONAR_SCANNER_OPTS="-server"
-        - sonar-scanner -Dsonar.projectKey=WhiteJohn -Dsonar.sources=. -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=sqp_5651a992840b34100c69fba16b7aae2db6670206
+        - sonar-scanner -Dsonar.projectKey=WhiteJohn -Dsonar.sources=. -Dsonar.host.url=https://codefirst.iut.uca.fr/sonar -Dsonar.login=$REACT_TOKEN #sqp_5651a992840b34100c69fba16b7aae2db6670206
