@@ -1,11 +1,44 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import React, { useContext } from 'react';
+import { ColorContext } from '../context/ColorContext';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, useColorScheme} from 'react-native';
 
 export default function InformationScreen() {
-  return (
-    <SafeAreaView style={{flex: 1, margin: 5}}>
-              
-      <ScrollView style={{flex: 1}}>
+  
+  const { isDarkMode, toggleTheme } = useContext(ColorContext);
+
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: isDarkMode ? 'black' : 'white',
+    },
+
+    title: {
+      flex: 1,
+      fontSize: 40,
+      fontWeight: 'bold',
+      fontFamily: 'sans-serif-medium',
+      margin: 20,
+      color: isDarkMode ? 'white' : 'black',
+    },
+    
+    image: {
+      flex: 1,
+      width: 350,
+      height: 350,
+      alignSelf: 'center',
+      borderRadius: 30
+    },
+
+    textDescription: {
+      alignItems: 'center',
+      textAlign: 'justify',
+      margin: 10,
+      fontSize: 15,
+      color: isDarkMode ? 'white' : 'black',
+    }  
+  });
+
+  return (              
+      <ScrollView style={styles.container}>
           <View>
             <View>
               <Image source={require('../assets/blackJack.png')} style={styles.image}/>
@@ -22,34 +55,7 @@ export default function InformationScreen() {
               gradually removed this special bet, the name Blackjack remained. </Text>
           </View>
       </ScrollView>
-    
-    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  title: {
-    flex: 1,
-    fontSize: 40,
-    fontWeight: 'bold',
-    fontFamily: 'sans-serif-medium',
-    margin: 20
-  },
-  
-  image: {
-    flex: 1,
-    width: 350,
-    height: 350,
-    alignSelf: 'center',
-    borderRadius: 30
-  },
-
-  textDescription: {
-    alignItems: 'center',
-    textAlign: 'justify',
-    margin: 10,
-    fontSize: 15
-  }
-  
-});
 

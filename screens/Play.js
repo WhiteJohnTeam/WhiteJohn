@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Component } from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-
+import { StyleSheet, Text, Image, View, TouchableOpacity, SafeAreaView, ScrollView, Colors} from 'react-native';
 
 export default function PlayScreen() {
 
-  const colors = [Colors.blue, Colors.red, Colors.gold, Colors.green, Colors.purple]
+  const colors = [ 'blue', 'red', 'gold', 'green', 'purple']
   const letters = ["H", "S", "P", "D", "R"]
 
   return (
@@ -55,14 +53,16 @@ export default function PlayScreen() {
     down: {
       justifyContent: 'flex-end',
       alignItems: 'center'
-    },
-  
+    }, 
     container: {
       alignSelf: 'center',
       paddingTop: 20,
     },
     button: {
+      height: 50,
+      width: 50,
       alignItems: 'center',
+      justifyContent: 'center',
       padding: 10,
       marginHorizontal: 10,
       borderRadius: 5,
