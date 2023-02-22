@@ -34,35 +34,14 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  middle: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  down: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
+  backgroundImage: {
+    width: `100%`,
+    height: `100%`,
   },
   buttonForm: {
-    width: 80,
-    height: 80,
-    borderColor: 'black',
-    borderWidth: 5,
-    borderRadius: 40,
-    alignItems: 'center',
+    height: '110%',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttonImage: {
-    height: 20,
-    width: 20,
-  }
 });
+
