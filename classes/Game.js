@@ -1,3 +1,4 @@
+/* passer en tsx */
 export default class Game {
     constructor(deckId) {
         console.warn("I am inside the constructor!")
