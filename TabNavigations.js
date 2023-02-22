@@ -8,6 +8,7 @@ import HomeScreen from './screens/Home';
 import CheatSheetScreen from './screens/Cheatsheet';
 import SettingsScreen from './screens/Settings';
 import InformationScreen from './screens/Informations';
+import StackNavigation from './StackNavigation';
 
 
 
@@ -16,7 +17,7 @@ export default function Navigation() {
     return (
         <NavigationContainer>
             <BottomTabNavigator.Navigator initialRouteName="Home">
-                <BottomTabNavigator.Screen name="Home" component={HomeScreen}
+                <BottomTabNavigator.Screen name="Home" component={StackNavigation}
                             options={{
                                 title: 'Home',
                                 tabBarIcon: ({color}) => <Icon name="home" color={color}/>,

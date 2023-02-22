@@ -10,7 +10,7 @@ export default function HomeScreen({navigation}) {
       <View>
         <ImageBackground style={styles.backgroundImage} source={require('../assets/home_WhiteJohn.png')} resizeMode='cover'>
           <View>
-            <TouchableOpacity style={styles.buttonForm} /*onPress={() => navigation.navigate("Play")}*/>
+            <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}>
               <Icon name='play-circle-outline' size={80}></Icon>      
             </TouchableOpacity> 
           </View>
