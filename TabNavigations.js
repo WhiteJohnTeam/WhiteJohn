@@ -1,5 +1,6 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, { useContext } from 'react';
+import { ColorContext } from './context/ColorContext';
+import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -11,12 +12,25 @@ import InformationScreen from './screens/Informations';
 import StackNavigation from './StackNavigation';
 
 
-
 export default function Navigation() {
+
+    const { isDarkMode, toggleTheme } = useContext(ColorContext);
+
+    const ColorTheme = {
+        dark: isDarkMode,
+        colors: {
+          ...DefaultTheme.colors,
+        },
+    };
+
     const BottomTabNavigator = createBottomTabNavigator();
     return (
-        <NavigationContainer>
-            <BottomTabNavigator.Navigator initialRouteName="Home">
+        <NavigationContainer theme={isDarkMode ? DarkTheme : ColorTheme}>
+            <BottomTabNavigator.Navigator initialRouteName="Home"
+                tabBarOptions={{
+                activeTintColor: isDarkMode ? 'green' : 'green',
+                inactiveTintColor: isDarkMode ? 'white' : '#303030',
+                }}>
                 <BottomTabNavigator.Screen name="Home" component={StackNavigation}
                             options={{
                                 title: 'Home',

@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, Header } from "@react-navigation/stack";
 import HomeScreen from "./screens/Home";
 import PlayScreen from "./screens/Play";

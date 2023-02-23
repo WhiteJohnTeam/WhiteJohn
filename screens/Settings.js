@@ -20,7 +20,7 @@ export default function SettingsScreen() {
   ];
 
   const renderItem = ({ item }) => (
-    <View >
+    <View>
       <TouchableOpacity style={styles.item}>
         <Image source={item.flag} style={styles.image} />
       </TouchableOpacity>    
@@ -42,7 +42,7 @@ export default function SettingsScreen() {
   
     options: {
       height: '100%',
-      backgroundColor: isDarkMode ? 'black' : 'white',
+      backgroundColor: isDarkMode ? '#303030' : 'white',
     },
   
     input: {
@@ -50,7 +50,7 @@ export default function SettingsScreen() {
       margin: 12,
       borderWidth: 1,
       padding: 10,
-      color: isDarkMode ? 'black' : 'white',
+      color: isDarkMode ? '#303030' : 'white',
     },
   });
 
@@ -59,7 +59,7 @@ export default function SettingsScreen() {
 
         <View style={styles.settingRow}>
           <Icon name='globe-outline' size={50}></Icon>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : 'black'}}>Language</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Language</Text>
           <Switch />
         </View>
 
@@ -76,19 +76,19 @@ export default function SettingsScreen() {
           <View style={styles.iconDecoration}>
             <Icon name='moon' size={45}></Icon>
           </View>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : 'black'}}>Dark Mode</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleTheme} />
         </View>
 
         <View style={styles.settingRow}>
           <Icon name='information-circle-outline' size={50}></Icon>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : 'black'}}>About us</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>About us</Text>
           <Switch></Switch>
         </View>
 
         <View style={styles.settingRow2}>
           <Icon name='pencil' size={50}></Icon>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : 'black'}}>Name your dealer</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Name your dealer</Text>
         </View>
         
         <View>

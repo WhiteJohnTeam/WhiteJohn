@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { ColorContext } from '../context/ColorContext';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, useColorScheme} from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image} from 'react-native';
 
 export default function InformationScreen() {
   
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
 
   const styles = StyleSheet.create({
+   
     container: {
-      backgroundColor: isDarkMode ? 'black' : 'white',
+      backgroundColor: isDarkMode ? '#303030' : 'white',
     },
 
     title: {
@@ -17,7 +18,7 @@ export default function InformationScreen() {
       fontWeight: 'bold',
       fontFamily: 'sans-serif-medium',
       margin: 20,
-      color: isDarkMode ? 'white' : 'black',
+      color: isDarkMode ? 'white' : '#303030',
     },
     
     image: {
@@ -33,7 +34,7 @@ export default function InformationScreen() {
       textAlign: 'justify',
       margin: 10,
       fontSize: 15,
-      color: isDarkMode ? 'white' : 'black',
+      color: isDarkMode ? 'white' : '#303030',
     }  
   });
 
