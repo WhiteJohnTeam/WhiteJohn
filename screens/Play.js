@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { ColorContext } from '../context/ColorContext';
+import { DealerContext } from '../context/DealerContext';
 import { StyleSheet, Text, Image, View, TouchableOpacity, SafeAreaView, ScrollView, Colors} from 'react-native';
 
 export default function PlayScreen() {
 
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
-
+  const { dealerName } = useContext(DealerContext);
+  
   const colors = [ 'blue', 'red', 'gold', 'green', 'purple']
   const letters = ["H", "S", "P", "D", "R"]
 
@@ -17,8 +19,16 @@ export default function PlayScreen() {
       justifyContent: 'flex-start',
     },
     dealer: {
-      justifyContent: 'flex-end',
-      flexDirection: 'row'
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    dealer_image: {
+      width: '100%',
+      resizeMode: 'contain',
+    },
+    dealer_name: {
+      fontSize: 20,
+      color: isDarkMode ? 'white' : '#303030',
     },
     text_top: {
       fontSize: 20,
@@ -28,21 +38,17 @@ export default function PlayScreen() {
     },
     text_middle: {
       fontSize: 20,
+      fontWeight: 'bold',
+      color: isDarkMode ? 'white' : '#303030'
     },
-    down: {
-      justifyContent: 'flex-end',
-      alignItems: 'center'
-    }, 
     scroll: {
       alignSelf: 'center',
-      paddingTop: 20,
     },
     button: {
       height: 50,
       width: 50,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 10,
       marginHorizontal: 10,
       borderRadius: 5,
     },
@@ -50,13 +56,19 @@ export default function PlayScreen() {
       color: 'white',
       fontWeight: 'bold',
     },
+    down: {
+      alignItems: 'center'
+    }, 
   });
   
   return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.dealer}>
-          <Image source={require('../assets/dealer.png')}/>
-        </View>      
+        <View style={styles.dealer_part}>
+          <View style={styles.dealer}>
+            <Image style={styles.dealer_image} source={require('../assets/dealer.png')}/>
+            <Text style={styles.dealer_name}> {dealerName}</Text>   
+          </View>    
+        </View>
         <View style={styles.middle}>
           <Text style={styles.text_middle}>YOUR CHOICE</Text>
         </View>

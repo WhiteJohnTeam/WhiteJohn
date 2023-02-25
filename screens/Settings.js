@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ColorContext } from '../context/ColorContext';
+import { DealerContext } from '../context/DealerContext';
+
 import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, SafeAreaView, Switch, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
 
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
+  const { dealerName, setDealerName } = useContext(DealerContext);
   const [text, setText] = useState('');
 
-  const onChangeText = (inputText) => {
-    setText(inputText);
-  };
+  const switchColor = isDarkMode ? 'white' : '#303030'
 
   const LANGUAGE_LIST = [
     { id: '1', flag: require('../assets/french.png') },
@@ -50,7 +50,7 @@ export default function SettingsScreen() {
       margin: 12,
       borderWidth: 1,
       padding: 10,
-      color: isDarkMode ? '#303030' : 'white',
+      color: isDarkMode ? 'white' : '#303030',
     },
   });
 
@@ -74,7 +74,7 @@ export default function SettingsScreen() {
 
         <View style={styles.settingRow}>
           <View style={styles.iconDecoration}>
-            <Icon name='moon' size={45}></Icon>
+            <Icon name='moon' size={45} colro={switchColor}></Icon>
           </View>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleTheme} />
@@ -94,8 +94,9 @@ export default function SettingsScreen() {
         <View>
           <TextInput
             placeholder="Choose the name of your dealer..."
-            onChangeText={onChangeText}
-            value={text}
+            onChangeText={newText => setText(newText)}
+            onSubmitEditing={() => setDealerName(text)}
+            value={text}   
             style={styles.input}
           />
         </View>
