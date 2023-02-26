@@ -1,17 +1,20 @@
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import { newGame } from '../redux/actions/newGame';
+import  newGame  from '../redux/actions/newGame';
 
-export default function HomeScreen({navigation}) {
+// ?? != cours
+import { RootState } from '../redux/store';
+
+export default function HomeScreen({ navigation}) {
   
   console.log("test?");
-  const game = useSelector(state => state.appReducer.game);
+  const game = useSelector((state) => state.wjReducer.game);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const loadGame = async () => {
-      await dispatch(newGame());
+      dispatch(newGame());
     };
     loadGame();
   }, [dispatch]);

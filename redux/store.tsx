@@ -1,9 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit'
-import appReducer from './reducers/appReducer';
+import wjReducer from './reducers/wjReducer';
 
 // Reference here all your application reducers
 const reducer = {
-  appReducer: appReducer,
+  wjReducer: wjReducer,
 }
 
 // @ts-ignore
@@ -11,4 +11,4 @@ const store = configureStore({
   reducer,
 },);
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;

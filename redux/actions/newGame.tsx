@@ -1,8 +1,7 @@
-import { fetchDeckFailed } from "./fetchDeckFailed";
 import Game from '../../classes/Game';
-import { setDeck } from "./setDeck";
+import setDeck  from "./setDeck";
 
-export const newGame = () => {
+export default function newGame () {
     return async dispatch => {
         try {
             console.warn("trying");
@@ -34,7 +33,7 @@ export const newGame = () => {
                 console.warn("deck id is: ", deck_id);
                 const game = new Game(deck_id);
                 console.warn("affected: ", game.deckId);
-                dispatch(setDeck(game.toObject()));
+                dispatch(setDeck(game));
               } catch (error) {
                 console.error(error);
               }

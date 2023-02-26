@@ -1,12 +1,12 @@
-import Game from '../../classes/Game';
 import { setDeck } from "./setDeck";
+import { Dispatch } from "redux";
 
-export const drawCard = (deckid) => {
-    return async dispatch => {
+export const drawCard = (deckid: string) => {
+    return async (dispatch: Dispatch) => {
         try {
             console.log("fetch card started ...");
             // first we fetch data from api
-            const cardPromise = await fetch('https://www.deckofcardsapi.com/api/deck/${deckid}/draw/?deck_count=1');
+            const cardPromise = await fetch(`https://www.deckofcardsapi.com/api/deck/${deckid}/draw/?deck_count=1`);
             // then we convert to json
             const cardJson = await cardPromise.json();
             // check if success
@@ -17,24 +17,15 @@ export const drawCard = (deckid) => {
             } else {
                 console.log("api request succeded");
             }
-            /* this line allows to get exactly what we want from the 
-            json (in the case the deck_id) */
-            const {card_id} = cardJson;
-            
-            /* now we can create a new game with
-            the id and dispatch it with our setDeck
-            action*/
-            // console.warn("deck id is: ",deck_id)
-            // const game = new Game(deck_id);
-            // console.warn("affected: ", game.deckId);
-            // dispatch(setDeck(game));
+
+            const { card_id } = cardJson.cards[0];
 
             try {
                 console.log("deckid: ", deckid);
                 console.log("cardid: ", card_id);
                 
-                console.warn("affected: ", game.deckId);
-                dispatch(setDeck(game.toObject()));
+                //console.warn("affected: ", game.deckId);
+               // dispatch(setDeck(game.toObject())); // assumes that game object is defined somewhere in the component
               } catch (error) {
                 console.error(error);
               }

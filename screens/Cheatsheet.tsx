@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image} from 'react-native';
 import { ColorContext } from '../context/ColorContext';
 
 export default function CheatSheetScreen() {

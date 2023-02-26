@@ -1,10 +1,10 @@
 import { FETCH_DECK } from "../constants"
 
 const initialState = {
-    game: null
+    game: null,
 }
 
-export default appReducer = (state = initialState, action) => {
+export default wjReducer  = (state = initialState, action ) => {
     switch (action.type) {
         case FETCH_DECK:
             return {...state, game: action.payload };

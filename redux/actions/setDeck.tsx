@@ -5,7 +5,7 @@ import Game from '../../classes/Game';
 a new deck from the API
  */
 
-export const setDeck = (game) => {
+export default function setDeck (game: Game) {
     return {
         type: FETCH_DECK,
         payload: game,

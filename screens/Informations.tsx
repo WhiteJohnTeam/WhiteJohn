@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { ColorContext } from '../context/ColorContext';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image} from 'react-native';
 
 export default function InformationScreen() {
   
