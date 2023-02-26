@@ -8,6 +8,6 @@ a new deck from the API
 export default function setDeck (game: Game) {
     return {
         type: FETCH_DECK,
-        payload: game,
+        payload: game.toObject(), // too object needed ?
     }
 }

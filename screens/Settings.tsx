@@ -21,8 +21,8 @@ export default function SettingsScreen({ navigation }) {
 
   const renderItem = ({ item }) => (
     <View>
-      <TouchableOpacity style={styles.item}>
-        <Image source={item.flag} style={styles.image} />
+      <TouchableOpacity>
+        <Image source={item.flag}/>
       </TouchableOpacity>    
     </View>
   );
@@ -73,7 +73,7 @@ export default function SettingsScreen({ navigation }) {
         </View>
 
         <View style={styles.settingRow}>
-          <View style={styles.iconDecoration}>
+          <View>
             <Icon name='moon' size={45} colro={switchColor}></Icon>
           </View>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Dark Mode</Text>
