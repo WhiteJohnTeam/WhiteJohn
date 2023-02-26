@@ -13,11 +13,25 @@ import PlayScreen from './screens/Play';
 
 
 export default function Navigation() {
+
+    const { isDarkMode, toggleTheme } = useContext(ColorContext);
+
+    const ColorTheme = {
+        dark: isDarkMode,
+        colors: {
+          ...DefaultTheme.colors,
+        },
+    };
+
     const BottomTabNavigator = createBottomTabNavigator();
     return (
-        <NavigationContainer>
-            <BottomTabNavigator.Navigator initialRouteName="Home">
-                <BottomTabNavigator.Screen name="Home" component={PlayScreen}
+        <NavigationContainer theme={isDarkMode ? DarkTheme : ColorTheme}>
+            <BottomTabNavigator.Navigator initialRouteName="Home"
+                tabBarOptions={{
+                activeTintColor: isDarkMode ? 'green' : 'green',
+                inactiveTintColor: isDarkMode ? 'white' : '#303030',
+                }}>
+                <BottomTabNavigator.Screen name="Home" component={StackNavigation}
                             options={{
                                 title: 'Home',
                                 tabBarIcon: ({color}) => <Icon name="home" color={color}/>,
