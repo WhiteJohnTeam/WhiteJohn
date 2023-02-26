@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import { newGame } from '../redux/actions/newGame';

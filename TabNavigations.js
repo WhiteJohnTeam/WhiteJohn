@@ -1,14 +1,15 @@
-import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme, DarkTheme} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import React, { useContext } from 'react';
+import { ColorContext } from './context/ColorContext';
+import StackNavigation from './StackNavigation';
+
 
 // Screens
-import HomeScreen from './screens/Home';
 import CheatSheetScreen from './screens/Cheatsheet';
 import SettingsScreen from './screens/Settings';
 import InformationScreen from './screens/Informations';
-import PlayScreen from './screens/Play';
 
 
 

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { ColorContext } from '../context/ColorContext';
 import { DealerContext } from '../context/DealerContext';
-import { StyleSheet, Text, Image, View, TouchableOpacity, SafeAreaView, ScrollView, Colors} from 'react-native';
+import { StyleSheet, Text, Image, View, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 
 export default function PlayScreen() {
 
