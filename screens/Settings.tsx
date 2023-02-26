@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react';
 import { ColorContext } from '../context/ColorContext';
 import { DealerContext } from '../context/DealerContext';
 
-import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, SafeAreaView, Switch, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function SettingsScreen({ navigation }) {
 
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
   const { dealerName, setDealerName } = useContext(DealerContext);
-  const [text, setText] = useState('');
+  const [text, setText] = useState<string>('');
 
   const switchColor = isDarkMode ? 'white' : '#303030'
 
