@@ -69,28 +69,30 @@ export default function PlayScreen() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.dealer}>
-        <Image
-          style={styles.dealer_image}
-          source={require("../assets/dealer.png")}
-        />
-        <Text style={styles.dealer_name}> {dealerName}</Text>
-      </View>
-      <View style={styles.middle}>
-        <Text style={styles.text_middle}>YOUR CHOICE</Text>
-      </View>
-      <ScrollView horizontal={true} style={styles.scroll}>
-        {colors.map((color, index) => (
-          <View key={index} style={[styles.button, { backgroundColor: color }]}>
-            <TouchableOpacity>
-              <Text style={styles.buttonText}>{letters[index]}</Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-      </ScrollView>
-      <View style={styles.down}>
-        <Image source={require("../assets/hands.png")} />
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={styles.dealer}>
+          <Image
+            style={styles.dealer_image}
+            source={require("../assets/dealer.png")}
+          />
+          <Text style={styles.dealer_name}> {dealerName}</Text>
+        </View>
+        <View style={styles.middle}>
+          <Text style={styles.text_middle}>YOUR CHOICE</Text>
+        </View>
+        <ScrollView horizontal={true} style={styles.scroll}>
+          {colors.map((color, index) => (
+            <View key={index} style={[styles.button, { backgroundColor: color }]}>
+              <TouchableOpacity>
+                <Text style={styles.buttonText}>{letters[index]}</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
+        <View style={styles.down}>
+          <Image source={require("../assets/hands.png")} />
+        </View>
       </View>
     </SafeAreaView>
   );

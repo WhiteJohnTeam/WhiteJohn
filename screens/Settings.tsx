@@ -4,6 +4,7 @@ import { DealerContext } from '../context/DealerContext';
 
 import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SettingsScreen({ navigation }) {
 
@@ -29,18 +30,14 @@ export default function SettingsScreen({ navigation }) {
 
   const styles = StyleSheet.create({
     settingRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between'
+      flexDirection: 'row',   
     },
   
     settingRow2: {
       flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around'
     },
   
-    options: {
+    options: { 
       height: '100%',
       backgroundColor: isDarkMode ? '#303030' : 'white',
     },
@@ -55,12 +52,12 @@ export default function SettingsScreen({ navigation }) {
   });
 
   return (
+    <SafeAreaView>
       <View style={styles.options}>
 
         <View style={styles.settingRow}>
-          <Icon name='globe-outline' size={50}></Icon>
+          <Icon name='globe-outline' size={50} color={switchColor}></Icon>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Language</Text>
-          <Switch />
         </View>
 
         <View>
@@ -74,20 +71,19 @@ export default function SettingsScreen({ navigation }) {
 
         <View style={styles.settingRow}>
           <View>
-            <Icon name='moon' size={45} colro={switchColor}></Icon>
+            <Icon name='moon' size={45} color={switchColor}></Icon>
           </View>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Dark Mode</Text>
           <Switch value={isDarkMode} onValueChange={toggleTheme} />
         </View>
 
         <View style={styles.settingRow}>
-          <Icon name='information-circle-outline' size={50}></Icon>
+          <Icon name='information-circle-outline' size={50} color={switchColor}></Icon>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>About us</Text>
-          <Switch></Switch>
         </View>
 
         <View style={styles.settingRow2}>
-          <Icon name='pencil' size={50}></Icon>
+          <Icon name='pencil' size={50} color={switchColor}></Icon>
           <Text style={{fontSize: 30, fontWeight: 'bold', color: isDarkMode ? 'white' : '#303030'}}>Name your dealer</Text>
         </View>
         
@@ -98,9 +94,12 @@ export default function SettingsScreen({ navigation }) {
             onSubmitEditing={() => setDealerName(text)}
             value={text}   
             style={styles.input}
+            cursorColor={switchColor}
+            placeholderTextColor={switchColor}
           />
         </View>
         
       </View>
+    </SafeAreaView>
   );
 }

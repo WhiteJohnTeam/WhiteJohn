@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import  newGame  from '../redux/actions/newGame';
@@ -20,6 +20,7 @@ export default function HomeScreen({ navigation}) {
   }, [dispatch]);
 
   return (
+    <SafeAreaView>
       <View>
         <ImageBackground style={styles.backgroundImage} source={require('../assets/home_WhiteJohn.png')} resizeMode='cover'>
           <View>
@@ -29,6 +30,7 @@ export default function HomeScreen({ navigation}) {
           </View>
         </ImageBackground>
       </View> 
+    </SafeAreaView>
   );
 }
 

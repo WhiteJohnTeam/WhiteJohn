@@ -13,15 +13,15 @@ export default function App() {
 
   const toggleTheme = () => setIsDarkMode(prevState => !prevState);
   
-  return (
+  return (          
+  <SafeAreaProvider>
     <ColorContext.Provider value={{ isDarkMode, toggleTheme}}>
       <DealerContext.Provider value={{ dealerName, setDealerName}}>
         <Provider store={store}>
-          <SafeAreaProvider>
-            <Navigation />
-          </SafeAreaProvider>
+            <Navigation/>
         </Provider>
       </DealerContext.Provider>
     </ColorContext.Provider>
+  </SafeAreaProvider>
   );
 }

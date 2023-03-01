@@ -29,18 +29,22 @@ export default function Navigation() {
         <NavigationContainer theme={ColorTheme}>
           <BottomTabNavigator.Navigator initialRouteName="Home"
 
-            /* not working
-            tabBarOptions={{
-              activeTintColor: isDarkMode ? 'green' : 'green',
-              inactiveTintColor: isDarkMode ? 'white' : '#303030',
-            }}*/>
+            screenOptions={{
+              tabBarActiveTintColor: isDarkMode ? 'green' : 'green',
+              tabBarInactiveTintColor: isDarkMode ? 'white' : '#303030',
+              tabBarShowLabel: false,
+              tabBarStyle: {
+                backgroundColor: isDarkMode ? '#303030' : 'white',
+              },
+              headerShown: false,
+            }}>
 
             <BottomTabNavigator.Screen
               name="Home"
               component={StackNavigation}
               options={{
                 title: 'Home',
-                tabBarIcon: ({ color }) => <Icon name="home" color={color} />,
+                tabBarIcon: ({ color }) => <Icon name="home" color={color} size={30}/>,
               }}
             />
             <BottomTabNavigator.Screen
@@ -48,7 +52,7 @@ export default function Navigation() {
               component={InformationScreen}
               options={{
                 title: 'BlackJack',
-                tabBarIcon: ({ color }) => <Icon name="md-cash" color={color} />,
+                tabBarIcon: ({ color }) => <Icon name="md-cash" color={color} size={30} />,
               }}
             />
             <BottomTabNavigator.Screen
@@ -56,7 +60,7 @@ export default function Navigation() {
               component={CheatSheetScreen}
               options={{
                 title: 'CheatSheet',
-                tabBarIcon: ({ color }) => <Icon name="document" color={color} />,
+                tabBarIcon: ({ color }) => <Icon name="document" color={color} size={30}/>,
               }}
             />
             <BottomTabNavigator.Screen
@@ -64,7 +68,7 @@ export default function Navigation() {
               component={SettingsScreen}
               options={{
                 title: 'Settings',
-                tabBarIcon: ({ color }) => <Icon name="settings" color={color} />,
+                tabBarIcon: ({ color }) => <Icon name="settings" color={color} size={30}/>,
               }}
             />
           </BottomTabNavigator.Navigator>

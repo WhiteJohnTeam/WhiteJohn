@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, SafeAreaView} from 'react-native';
 import { ColorContext } from '../context/ColorContext';
 
 export default function CheatSheetScreen() {
@@ -31,14 +31,14 @@ export default function CheatSheetScreen() {
   });
 
   return (
-    
+    <SafeAreaView>
       <ScrollView style={styles.container}>
           <View>
             <Text style={styles.textDescription}>Casino games has been designed to make players lose in the long run. To make the best of the situation and increase players’ chances of winning the game, gamblers are always looking for various solutions to reduce the house edge. This is why the blackjack cheat sheet has become popular among players. By having the cheat sheet and knowing how to use it, you can easily increase your chances of winning if you are planning on playing a game against the dealer.</Text>
             <Image source={require('../assets/cheatSheet.png')} style={styles.image}/>
           </View>
       </ScrollView>
-
+    </SafeAreaView>
   );
 }
 
