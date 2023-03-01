@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import {
@@ -9,7 +9,10 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Button,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { drawCard } from "../redux/actions/drawCard";
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -17,6 +20,20 @@ export default function PlayScreen() {
 
   const colors = ["blue", "red", "gold", "green", "purple"];
   const letters = ["H", "S", "P", "D", "R"];
+
+  const game = useSelector((state) => state.wjReducer.game);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const loadGame = async () => {
+     await dispatch(newGame());
+    };
+    const roundDraw = async() => {
+      await dispatch(drawCard());
+    }
+    loadGame();
+  }, [dispatch]);
+
 
   const styles = StyleSheet.create({
     container: {
@@ -68,8 +85,14 @@ export default function PlayScreen() {
     },
   });
 
+  function playerDraw(): void {
+    
+  }
+
   return (
     <SafeAreaView style={styles.container}>
+      <Text>Game id: {game.deckId}</Text>
+
       <View style={styles.dealer}>
         <Image
           style={styles.dealer_image}
@@ -89,9 +112,13 @@ export default function PlayScreen() {
           </View>
         ))}
       </ScrollView>
+
+      <Button title="DrawCard" onPress={() => playerDraw()}></Button>
+
       <View style={styles.down}>
         <Image source={require("../assets/hands.png")} />
       </View>
     </SafeAreaView>
   );
 }
+

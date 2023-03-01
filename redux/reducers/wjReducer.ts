@@ -1,7 +1,8 @@
+import Game from "../../classes/Game";
 import { FETCH_DECK } from "../constants"
 
 const initialState = {
-    game: null,
+    game: new Game(),
 }
 
 export default wjReducer  = (state = initialState, action ) => {

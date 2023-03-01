@@ -1,4 +1,3 @@
-import { setDeck } from "./setDeck";
 import { Dispatch } from "redux";
 
 export const drawCard = (deckid: string) => {
@@ -19,10 +18,12 @@ export const drawCard = (deckid: string) => {
             }
 
             const { card_id } = cardJson.cards[0];
+            const { svg_image } = cardJson.images[0];
 
             try {
-                console.log("deckid: ", deckid);
-                console.log("cardid: ", card_id);
+                console.log("deckid: ", deckid)
+                console.log("cardid: ", card_id)
+                console.log("image: ", svg_image)
                 
                 //console.warn("affected: ", game.deckId);
                // dispatch(setDeck(game.toObject())); // assumes that game object is defined somewhere in the component

@@ -3,28 +3,26 @@ import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import  newGame  from '../redux/actions/newGame';
 
-// ?? != cours
-import { RootState } from '../redux/store';
-
 export default function HomeScreen({ navigation}) {
   
-  console.log("test?");
-  const game = useSelector((state) => state.wjReducer.game);
-  const dispatch = useDispatch();
+  // console.log("test?");
+  // const game = useSelector((state) => state.wjReducer.game);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    const loadGame = async () => {
-      dispatch(newGame());
-    };
-    loadGame();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const loadGame = async () => {
+  //    await dispatch(newGame());
+  //   };
+  //   loadGame();
+  // }, [dispatch]);
 
   return (
       <View>
         <ImageBackground style={styles.backgroundImage} source={require('../assets/home_WhiteJohn.png')} resizeMode='cover'>
           <View>
             <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}>
-              <Text style={{fontSize: 16}}>Press anywhere to play</Text>     
+              
+              <Text style={{fontSize: 24}}>Press anywhere to play</Text>     
             </TouchableOpacity> 
           </View>
         </ImageBackground>

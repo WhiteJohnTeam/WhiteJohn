@@ -3,7 +3,7 @@ export default class Game {
   playerHand: Card[];
   dealerHand: Card[];
 
-  constructor(deckId: string) {
+  constructor(deckId?: string) {
     console.warn('I am inside the constructor!');
     try {
       this.deckId = deckId;
