@@ -1,4 +1,4 @@
-enum PlayerType {
+export enum PlayerType {
     Player,
     Dealer
 }

@@ -1,3 +1,6 @@
+import Card from "./Card";
+import { PlayerType } from "./PlayerType";
+
 export default class Game {
   deckId: string;
   playerHand: Card[];
