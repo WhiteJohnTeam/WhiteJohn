@@ -8,6 +8,12 @@ class Card {
       this.suit = suit;
       this.image = image;
     }
-  }
 
-/* might extend from Component */ 
+    toObject() {
+      return {
+        value : this.value, 
+        suit : this.suit
+      }
+    }
+}
+ 

@@ -5,7 +5,7 @@ import Game from '../../classes/Game';
 a new deck from the API
  */
 
-export default function setDeck (game: Game) {
+export default function fetchDeck (game: Game) {
     return {
         type: FETCH_DECK,
         payload: game.toObject(), // too object needed ?

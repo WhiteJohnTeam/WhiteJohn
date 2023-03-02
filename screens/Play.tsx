@@ -12,7 +12,7 @@ import {
   Button,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { drawCard } from "../redux/actions/drawCard";
+import { drawCard } from "../redux/thunks/drawCard";
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -26,7 +26,7 @@ export default function PlayScreen() {
 
   useEffect(() => {
     const loadGame = async () => {
-     await dispatch(newGame());
+     await dispatch(fetchDeck());
     };
     const roundDraw = async() => {
       await dispatch(drawCard());

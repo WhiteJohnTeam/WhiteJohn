@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import  newGame  from '../redux/actions/newGame';
+import  newGame  from '../redux/thunks/fetchDeck';
 
 export default function HomeScreen({ navigation}) {
   

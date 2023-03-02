@@ -1,7 +1,5 @@
-import Game from '../../classes/Game';
-import setDeck  from "./setDeck";
-
-export default function newGame () {
+import setDeck  from "../actions/fetchDeck";
+export default function fetchDeck () {
     return async dispatch => {
         try {
             console.warn("trying");
@@ -20,20 +18,10 @@ export default function newGame () {
             /* this line allows to get exactly what we want from the 
             json (in the case the deck_id) */
             const {deck_id} = deckJson;
-            
-            /* now we can create a new game with
-            the id and dispatch it with our setDeck
-            action*/
-            // console.warn("deck id is: ",deck_id)
-            // const game = new Game(deck_id);
-            // console.warn("affected: ", game.deckId);
-            // dispatch(setDeck(game));
 
             try {
                 console.warn("deck id is: ", deck_id);
-                const game = new Game(deck_id);
-                console.warn("affected: ", game.deckId);
-                dispatch(setDeck(game));
+                dispatch(setDeck(deck_id));
               } catch (error) {
                 console.error(error);
               }
