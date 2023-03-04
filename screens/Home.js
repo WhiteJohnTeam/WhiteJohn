@@ -1,13 +1,18 @@
-import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, SafeAreaView} from 'react-native';
+import React, { useContext } from "react";
+import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import  newGame  from '../redux/actions/newGame';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ColorContext } from "../context/ColorContext";
+
 
 // ?? != cours
 import { RootState } from '../redux/store';
 
 export default function HomeScreen({ navigation}) {
   
+  const { isDarkMode, toggleTheme } = useContext(ColorContext);
   console.log("test?");
   const game = useSelector((state) => state.wjReducer.game);
   const dispatch = useDispatch();
@@ -22,7 +27,7 @@ export default function HomeScreen({ navigation}) {
   return (
     <SafeAreaView>
       <View>
-        <ImageBackground style={styles.backgroundImage} source={require('../assets/home_WhiteJohn.png')} resizeMode='cover'>
+        <ImageBackground style={styles.backgroundImage} source={isDarkMode ? require('../assets/home_WhiteJohn_dark.png') : require('../assets/home_WhiteJohn.png') } resizeMode='cover'>
           <View>
             <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}>
               <Text style={{fontSize: 16}}>Press anywhere to play</Text>     

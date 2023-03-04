@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ColorContext } from '../context/ColorContext';
 import { DealerContext } from '../context/DealerContext';
 
-import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList} from 'react-native';
+import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -88,25 +88,25 @@ export default function SettingsScreen({ navigation }) {
   });
 
   return (
-    <View style={styles.settings}>
-  <View style={styles.settingRow}>
-    <Icon name="globe-outline" size={40} style={styles.icon} />
-    <Text style={styles.sectionTitle}>Language</Text>
-    <TouchableOpacity onPress={handleLanguageListToggle}>
-      <Icon name="arrow-down-circle-outline" size={30} style={styles.icon2} />
-    </TouchableOpacity>
-  </View>
-  {languageListVisible && (
-    <View style={styles.languageListContainer}>
-      <FlatList
-        horizontal={true}
-        data={LANGUAGE_LIST}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        contentContainerStyle={styles.languageListContent}
-      />
+  <SafeAreaView style={styles.settings}>
+    <View style={styles.settingRow}>
+      <Icon name="globe-outline" size={40} style={styles.icon} />
+      <Text style={styles.sectionTitle}>Language</Text>
+      <TouchableOpacity onPress={handleLanguageListToggle}>
+        <Icon name="arrow-down-circle-outline" size={30} style={styles.icon2} />
+      </TouchableOpacity>
     </View>
-  )}
+    {languageListVisible && (
+      <View style={styles.languageListContainer}>
+        <FlatList
+          horizontal={true}
+          data={LANGUAGE_LIST}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.languageListContent}
+        />
+      </View>
+    )}
     <View style={styles.settingRow}>
       <Icon name="moon" size={40} style={styles.icon} />
       <Text style={styles.sectionTitle}>Dark Mode</Text>
@@ -131,7 +131,7 @@ export default function SettingsScreen({ navigation }) {
           placeholderTextColor={switchColor}
         />
     </View>
-  </View>
+  </SafeAreaView>
   );
 
 }

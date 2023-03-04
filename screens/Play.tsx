@@ -1,15 +1,9 @@
 import React, { useContext } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
