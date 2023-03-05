@@ -15,5 +15,22 @@ export default class Card {
         suit : this.suit
       }
     }
+
+    toString() {
+      const suitSymbol = {
+        "C": "♣",
+        "D": "♦",
+        "H": "♥",
+        "S": "♠",
+      }[this.suit];
+      const valueString = {
+        1: "Ace",
+        11: "Jack",
+        12: "Queen",
+        13: "King",
+      }[this.value] || this.value.toString();
+    
+      return `${valueString} of ${suitSymbol}`;
+    }
 }
  

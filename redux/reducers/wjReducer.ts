@@ -1,39 +1,38 @@
 import Card from "../../classes/Card";
 import Game from "../../classes/Game";
+import { PlayerType } from "../../classes/PlayerType";
 import { DRAW_CARD, SET_DECK } from "../constants"
 
 const initialState = {
-    game: new Game(),
+    deckId: "",
+    playerHand: [],
+    dealerHand: []
 }
 
 export default wjReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_DECK:
             return {
-            ...state,
-            game: {
-                ...state.game,
+                ...state,
                 deckId: action.payload.deckId
-            }
             };
         case DRAW_CARD:
             const { cardImage, cardValue, cardSuit, player } = action.payload;
-            const card = new Card(cardValue,cardSuit,cardImage);
-            // get a copy of the current galme and
-            // setup a updated game with the new card
-            const game = {...state.game};
-            const updated = new Game(game.deckId);
+            const updatedPlayerHand = [...state.playerHand];
+            const updatedDealerHand = [...state.dealerHand];
 
-            updated.playerHand = game.dealerHand;
-            updated.dealerHand = game.playerHand;
-            
-            updated.Draw(card, player);
+            if (player === PlayerType.Player) {
+                updatedPlayerHand.push({ image: cardImage, value: cardValue, suit: cardSuit });
+            } else {
+                updatedDealerHand.push({ image: cardImage, value: cardValue, suit: cardSuit });
+            }
 
             return {
                 ...state,
-                game : updated,
+                playerHand: updatedPlayerHand,
+                dealerHand: updatedDealerHand
             };
-            
+                    
         default:
             return state;
     }

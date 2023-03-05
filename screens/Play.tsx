@@ -23,7 +23,7 @@ export default function PlayScreen() {
   const colors = ["blue", "red", "gold", "green", "purple"];
   const letters = ["H", "S", "P", "D", "R"];
 
-  const game = useSelector(state => state.wjReducer.game);
+  const { deckId, playerHand, dealerHand } = useSelector(state => state.wjReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,9 +33,13 @@ export default function PlayScreen() {
     loadGame();
   }, [dispatch]);
 
-  const omg = async () => {
-    await dispatch(fetchCard(PlayerType.Player, game.deckId));
-    console.warn(game.playerHand)
+  const playerDraw = async () => {
+    try {
+      await dispatch(fetchCard(PlayerType.Player, deckId));
+      console.warn("what:", playerHand.lenght);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }    
 
 
@@ -89,13 +93,9 @@ export default function PlayScreen() {
     },
   });
 
-  function playerDraw(): void {
-    
-  }
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Game id: {game.deckId}</Text>
+      <Text>Game id: {deckId}</Text>
 
       <View style={styles.dealer}>
         <Image
@@ -117,7 +117,7 @@ export default function PlayScreen() {
         ))}
       </ScrollView>
 
-      <Button title="DrawCard" onPress={() => omg()}></Button>
+      <Button title="DrawCard" onPress={() => playerDraw()}></Button>
       <View style={styles.down}>
         <Image source={require("../assets/hands.png")} />
       </View>
