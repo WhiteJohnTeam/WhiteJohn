@@ -1,8 +1,9 @@
 import { Dispatch } from "redux";
 import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
+import drawCard from "../actions/drawCard";
 
-export const drawCard = (who : PlayerType, card: Card, deck_id: string) => {
+export const fetchCard = (who : PlayerType, deck_id: string) => {
     return async dispatch => {
         try {
             console.log("fetch card started ...");
@@ -20,14 +21,11 @@ export const drawCard = (who : PlayerType, card: Card, deck_id: string) => {
             }
 
             const card_info = cardJson.cards[0];
-            card.image = card_info.images.svg;
-            card.value = card_info.value;
-            card.suit = card_info.suit;
 
             try {
-                console.log("deckid: ", deck_id)
-                console.log("image: ", card.image)
-                dispatch(drawCard(who, card, deck_id))
+                console.warn("deckid: ", deck_id)
+                console.warn("image: ", card_info.images.svg)
+                dispatch(drawCard(card_info.images.svg, card_info.value, card_info.suit, who))
               } catch (error) {
                 console.error(error);
               }

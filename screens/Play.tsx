@@ -2,8 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
-import { drawCard } from "../redux/thunks/drawCard";
-import setDeck from "../redux/actions/setDeck";
+import { fetchCard } from "../redux/thunks/fetchCard";
 import fetchDeck from "../redux/thunks/fetchDeck";
 import {
   StyleSheet,
@@ -15,6 +14,7 @@ import {
   ScrollView,
   Button,
 } from "react-native";
+import { PlayerType } from "../classes/PlayerType";
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -33,8 +33,9 @@ export default function PlayScreen() {
     loadGame();
   }, [dispatch]);
 
-  const drawCard = () => {
-
+  const omg = async () => {
+    await dispatch(fetchCard(PlayerType.Player, game.deckId));
+    console.warn(game.playerHand)
   }    
 
 
@@ -116,8 +117,7 @@ export default function PlayScreen() {
         ))}
       </ScrollView>
 
-      <Button title="DrawCard" onPress={() => playerDraw()}></Button>
-      <Button title="New Game" onPress={() => drawCard()}></Button>
+      <Button title="DrawCard" onPress={() => omg()}></Button>
       <View style={styles.down}>
         <Image source={require("../assets/hands.png")} />
       </View>
