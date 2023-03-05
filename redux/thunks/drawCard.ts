@@ -1,4 +1,6 @@
 import { Dispatch } from "redux";
+import Card from "../../classes/Card";
+import { PlayerType } from "../../classes/PlayerType";
 
 export const drawCard = (who : PlayerType, card: Card, deck_id: string) => {
     return async dispatch => {
@@ -26,7 +28,6 @@ export const drawCard = (who : PlayerType, card: Card, deck_id: string) => {
                 console.log("deckid: ", deck_id)
                 console.log("image: ", card.image)
                 dispatch(drawCard(who, card, deck_id))
-                
               } catch (error) {
                 console.error(error);
               }

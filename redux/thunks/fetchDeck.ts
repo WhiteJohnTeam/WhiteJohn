@@ -1,4 +1,4 @@
-import setDeck  from "../actions/fetchDeck";
+import setDeck  from "../actions/setDeck";
 export default function fetchDeck () {
     return async dispatch => {
         try {

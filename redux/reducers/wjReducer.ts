@@ -1,5 +1,5 @@
 import Game from "../../classes/Game";
-import { DRAW_CARD, FETCH_DECK } from "../constants"
+import { DRAW_CARD, SET_DECK } from "../constants"
 
 const initialState = {
     game: new Game(),
@@ -7,7 +7,7 @@ const initialState = {
 
 export default wjReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_DECK:
+        case SET_DECK:
             return {
             ...state,
             game: {

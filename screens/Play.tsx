@@ -1,6 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
+import { useDispatch, useSelector } from "react-redux";
+import { drawCard } from "../redux/thunks/drawCard";
+import setDeck from "../redux/actions/setDeck";
+import fetchDeck from "../redux/thunks/fetchDeck";
 import {
   StyleSheet,
   Text,
@@ -11,8 +15,6 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { drawCard } from "../redux/thunks/drawCard";
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -21,18 +23,19 @@ export default function PlayScreen() {
   const colors = ["blue", "red", "gold", "green", "purple"];
   const letters = ["H", "S", "P", "D", "R"];
 
-  const game = useSelector((state) => state.wjReducer.game);
+  const game = useSelector(state => state.wjReducer.game);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const loadGame = async () => {
      await dispatch(fetchDeck());
     };
-    const roundDraw = async() => {
-      await dispatch(drawCard());
-    }
     loadGame();
   }, [dispatch]);
+
+  const drawCard = () => {
+
+  }    
 
 
   const styles = StyleSheet.create({
@@ -114,7 +117,7 @@ export default function PlayScreen() {
       </ScrollView>
 
       <Button title="DrawCard" onPress={() => playerDraw()}></Button>
-
+      <Button title="New Game" onPress={() => drawCard()}></Button>
       <View style={styles.down}>
         <Image source={require("../assets/hands.png")} />
       </View>

@@ -1,6 +1,6 @@
 import Game from '../classes/Game';
 import Card from '../classes/Card';
-import fetchDeck from '../redux/actions/fetchDeck';
+import fetchDeck from '../redux/actions/setDeck';
 import drawCard from '../redux/actions/drawCard';
 import wjReducer from '../redux/reducers/wjReducer';
 import { PlayerType } from '../classes/PlayerType';

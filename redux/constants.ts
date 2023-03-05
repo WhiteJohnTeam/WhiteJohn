@@ -1,4 +1,4 @@
-export const FETCH_DECK = 'FETCH_DECK';
+export const SET_DECK = 'SET_DECK';
 export const DRAW_CARD = 'DRAW_CARD';
 
 // Api failed ?
