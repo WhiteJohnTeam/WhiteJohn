@@ -15,6 +15,7 @@ import {
   Button,
 } from "react-native";
 import { PlayerType } from "../classes/PlayerType";
+import { fetchFour } from "../redux/thunks/fetchFour";
 
 export default function PlayScreen() {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -41,6 +42,14 @@ export default function PlayScreen() {
       console.error("Error:", error);
     }
   }    
+
+  const Begin = async () => {
+    try {
+      await dispatch(fetchFour(deckId));
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  } 
 
 
   const styles = StyleSheet.create({
@@ -91,6 +100,21 @@ export default function PlayScreen() {
     down: {
       alignItems: "center",
     },
+    cardZone: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      paddingHorizontal: 20,
+      marginTop: 20,
+    },
+    cardValue: {
+      fontSize: 20,
+      color: isDarkMode ? "white" : "#303030",
+    },
+    cardSuit: {
+      fontSize: 20,
+      fontWeight: "bold",
+      color: isDarkMode ? "white" : "#303030",
+    },
   });
 
   return (
@@ -118,6 +142,17 @@ export default function PlayScreen() {
       </ScrollView>
 
       <Button title="DrawCard" onPress={() => playerDraw()}></Button>
+
+      <Button title="StartGame" onPress={() => Begin()}></Button>
+
+      <View style={styles.cardZone}>
+        <View>
+          <Text>HANDS: </Text>
+          <Text>PLAYER'S : {playerHand[0] && `${playerHand[0].value} ${playerHand[0].suit},`} {playerHand[1] && `${playerHand[1].value} ${playerHand[1].suit}`}</Text>
+          <Text>DEALER'S : {dealerHand[0] && `${dealerHand[0].value} ${dealerHand[0].suit},`} {dealerHand[1] && `${dealerHand[1].value} ${dealerHand[1].suit}`}</Text>
+        </View>
+      </View>
+
       <View style={styles.down}>
         <Image source={require("../assets/hands.png")} />
       </View>
