@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import React, { useState } from "react";
 import { ColorContext } from './context/ColorContext';
 import { DealerContext } from './context/DealerContext';
+import { Dimensions } from "react-native";
 
 
 export default function App() {
@@ -13,6 +14,9 @@ export default function App() {
 
   const toggleTheme = () => setIsDarkMode(prevState => !prevState);
   
+  global.width = Dimensions.get('window').width;
+  global.height = Dimensions.get('window').height;
+
   return (          
   <SafeAreaProvider>
     <ColorContext.Provider value={{ isDarkMode, toggleTheme}}>
