@@ -8,9 +8,10 @@ export const fetchFour = (deckId: string) => {
           `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=4`
         );
         const data = await response.json();
-        const cards = data.cards.map(
-          (card) => new Card(card.value, card.suit, card.image)
-        );
+        const cards = data.cards.map((card) => ({
+          value: card.value,
+          suit: card.suit,
+        }));
         dispatch(startGame(cards));
       } catch (error) {
         dispatch({ type: "FETCH_CARDS_FAILURE", payload: error.message });
