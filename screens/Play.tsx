@@ -36,7 +36,7 @@ export default function PlayScreen() {
   const playerDraw = async () => {
     try {
       await dispatch(fetchCard(PlayerType.Player, deckId));
-      console.warn("what:", playerHand.lenght);
+      console.warn("what:", playerHand.length);
     } catch (error) {
       console.error("Error:", error);
     }
