@@ -11,7 +11,7 @@ export const ColorContext = createContext<ThemeContextType>({
 });
 
 export function ThemeProvider({ children }) {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
     const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -21,3 +21,5 @@ export function ThemeProvider({ children }) {
         </ColorContext.Provider>
     );
 }
+
+export default ColorContext;

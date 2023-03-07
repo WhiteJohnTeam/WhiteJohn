@@ -1,13 +1,16 @@
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, ImageBackground} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import  newGame  from '../redux/thunks/fetchDeck';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ColorContext } from "../context/ColorContext";
 
 export default function HomeScreen({ navigation}) {
   
-  // console.log("test?");
-  // const game = useSelector((state) => state.wjReducer.game);
-  // const dispatch = useDispatch();
+  const { isDarkMode, toggleTheme } = useContext(ColorContext);
+  console.log("test?");
+  const game = useSelector((state) => state.wjReducer.game);
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   const loadGame = async () => {
@@ -17,8 +20,9 @@ export default function HomeScreen({ navigation}) {
   // }, [dispatch]);
 
   return (
+    <SafeAreaView>
       <View>
-        <ImageBackground style={styles.backgroundImage} source={require('../assets/home_WhiteJohn.png')} resizeMode='cover'>
+        <ImageBackground style={styles.backgroundImage} source={isDarkMode ? require('../assets/home_WhiteJohn_dark.png') : require('../assets/home_WhiteJohn.png') } resizeMode='cover'>
           <View>
             <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}>
               
@@ -27,6 +31,7 @@ export default function HomeScreen({ navigation}) {
           </View>
         </ImageBackground>
       </View> 
+    </SafeAreaView>
   );
 }
 

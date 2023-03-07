@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { ColorContext } from '../context/ColorContext';
 import { StyleSheet, Text, View, ScrollView, Image} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function InformationScreen() {
   
@@ -38,7 +39,8 @@ export default function InformationScreen() {
     }  
   });
 
-  return (              
+  return (          
+    <SafeAreaView>   
       <ScrollView style={styles.container}>
           <View>
             <View>
@@ -56,6 +58,7 @@ export default function InformationScreen() {
               gradually removed this special bet, the name Blackjack remained. </Text>
           </View>
       </ScrollView>
+    </SafeAreaView>
   );
 }
 
