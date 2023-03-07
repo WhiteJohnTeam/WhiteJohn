@@ -41,14 +41,14 @@ const drawCardAndUpdateHand = (state, card, player) => {
         
         
           case START_GAME:
-            console.warn("reducing...")
+            //console.warn("reducing...")
             let newPlayerHand = [...state.playerHand];
             let newDealerHand = [...state.dealerHand];
 
             // Draw two cards for the player
             for (let i = 0; i < 2; i++) {
                 const { value, suit } = action.payload[i];
-                console.warn("card: ", value)
+                //console.warn("card: ", value)
                 newPlayerHand.push({ image: "", value: value, suit: suit });
             }
 
