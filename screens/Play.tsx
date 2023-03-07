@@ -51,7 +51,6 @@ export default function PlayScreen() {
     }
   } 
 
-
   const styles = StyleSheet.create({
     container: {
       backgroundColor: isDarkMode ? "#303030" : "white",
