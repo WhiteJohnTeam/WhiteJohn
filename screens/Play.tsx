@@ -9,7 +9,7 @@ import { fetchFour } from "../redux/thunks/fetchFour";
 import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
-//import Deck from 'deck-of-cards';
+import Deck from 'deck-of-cards';
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -48,36 +48,16 @@ export default function PlayScreen({ navigation}) {
   }    
 
   const Start = async () => {
-    setShowModal(false);
+
     try {
       //@ts-ignore
       await dispatch(fetchFour(deckId));
     } catch (error) {
       console.error("Error:", error);
-    }
+    }    
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setShowModal(false);
   } 
-
-  /*const MyComponent: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const deck = useRef(Deck());
-  
-    useEffect(() => {
-      if (containerRef.current) {
-        deck.current.mount(containerRef.current);
-  
-        // Mélange les cartes
-        deck.current.shuffle();
-  
-        // Distribue les cartes
-        deck.current.deal(4);
-  
-        // Retourne les cartes dans le jeu de cartes
-        deck.current.cards.forEach(function (card) {
-          card.unmount();
-          deck.current.mount(card);
-        });
-      }
-    }, []);*/
 
   const styles = StyleSheet.create({
     play: {
@@ -243,8 +223,8 @@ export default function PlayScreen({ navigation}) {
           <View style={modalStyle.centeredView}>
             <View style={modalStyle.modalView}>
               {showAnimation ? (
-                <View style={modalStyle.animationContainer}>
-                  { /* Ajoutez ici votre code d'animation */ }
+                <View>
+                  <Image source={require('../assets/shuffle_deck.gif')} style={{width: 170, height: 100}} />
                 </View>
               ) : (
                 <View>
@@ -253,7 +233,10 @@ export default function PlayScreen({ navigation}) {
                     
                     <TouchableOpacity
                       style={[modalStyle.button, modalStyle.buttonOpen]}
-                      onPress={() => Start()}
+                      onPress={() => {
+                        setShowAnimation(true);
+                        Start();
+                      }}
                     >
                       <Text style={modalStyle.textStyle}>Start</Text>
                     </TouchableOpacity>
@@ -261,7 +244,6 @@ export default function PlayScreen({ navigation}) {
                       style={[modalStyle.button, modalStyle.buttonClose]}
                       onPress={() => {
                         setShowModal(false);
-                        setShowAnimation(true);                   
                         navigation.navigate("Home")
                       } }
                     >
@@ -277,4 +259,3 @@ export default function PlayScreen({ navigation}) {
     </SafeAreaView>
   );
 }
-//}
