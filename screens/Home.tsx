@@ -9,6 +9,7 @@ export default function HomeScreen({ navigation}) {
   
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
   console.log("test?");
+  //@ts-ignore
   const game = useSelector((state) => state.wjReducer.game);
   const dispatch = useDispatch();
 
@@ -24,8 +25,7 @@ export default function HomeScreen({ navigation}) {
       <View>
         <ImageBackground style={styles.backgroundImage} source={isDarkMode ? require('../assets/home_WhiteJohn_dark.png') : require('../assets/home_WhiteJohn.png') } resizeMode='cover'>
           <View>
-            <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}>
-              
+            <TouchableOpacity style={styles.buttonForm} onPress={() => navigation.navigate("Play")}> 
               <Text style={{fontSize: 24}}>Press anywhere to play</Text>     
             </TouchableOpacity> 
           </View>
