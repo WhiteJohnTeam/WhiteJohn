@@ -6,10 +6,10 @@ export default class Game {
   playerHand: Card[];
   dealerHand: Card[];
 
-  constructor(deckId?: string) {
+  constructor(deckId?: string, playerH?: Card[], dealerH?: Card[]) {
       this.deckId = deckId;
-      this.playerHand = [];
-      this.dealerHand = [];
+      this.playerHand = playerH;
+      this.dealerHand = dealerH;
   }
 
   Draw(card: Card, who: PlayerType.Player | PlayerType.Dealer): void {

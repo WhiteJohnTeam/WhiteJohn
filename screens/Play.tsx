@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import { PlayerType } from "../classes/PlayerType";
 import { fetchFour } from "../redux/thunks/fetchFour";
 import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Game from "../classes/Game";
+import startGame from "../redux/actions/startGame";
 
 
 export default function PlayScreen() {
@@ -18,14 +20,21 @@ export default function PlayScreen() {
   const letters = ["H", "S", "P", "D", "R"];
 
   const { deckId, playerHand, dealerHand } = useSelector(state => state.wjReducer);
+  const [game, setGame] = useState(new Game(deckId, playerHand, dealerHand)); // to update the game var each time state is updated
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     const loadGame = async () => {
-     await dispatch(fetchDeck());
+     await dispatch(fetchDeck());;
     };
     loadGame();
   }, [dispatch]);
+
+  useEffect(() => {
+    setGame(new Game(deckId, playerHand, dealerHand));
+  }, [deckId, playerHand, dealerHand]);
 
   const playerDraw = async () => {
     try {
@@ -36,7 +45,7 @@ export default function PlayScreen() {
     }
   }    
 
-  const Begin = async () => {
+  const Start = async () => {
     try {
       await dispatch(fetchFour(deckId));
     } catch (error) {
@@ -110,6 +119,9 @@ export default function PlayScreen() {
             source={require("../assets/dealer.png")}/>
           <Text style={styles.dealer_name}> {dealerName}</Text>
         </View>
+
+        <View style={styles.middle}><Text  >Dealer: </Text></View>
+
         <View style={styles.middle}>
           <TouchableOpacity style={styles.choice}>
             <Text style={styles.text_choice}>HIT</Text>
@@ -119,6 +131,19 @@ export default function PlayScreen() {
             <Text style={styles.text_choice}>STAND</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={styles.middle}>
+          <Text>Player: </Text>
+          {game.playerHand.map((card, index) => (
+            <Text key={index}>
+              {card.value} {card.suit}
+              {index < game.playerHand.length - 1 ? ", " : ""}
+            </Text>
+          ))}
+        </View>
+
+
+
         <View style={styles.down}>
           <Text style={styles.text_down}>YOUR HAND</Text>
         </View>
