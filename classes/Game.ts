@@ -7,7 +7,12 @@ export default class Game {
   playerHand: Card[];
   dealerHand: Card[];
   dealerRevealed: boolean;
-
+  gameEnded: boolean;
+  whosTurn: PlayerType;
+  gameWinner: PlayerType;
+  playerTotalPoints: number;
+  dealerTotalPoints: number;
+  
   constructor(deckId?: string, playerH?: Card[], dealerH?: Card[]) {
       this.deckId = deckId;
       this.playerHand = playerH;
@@ -28,11 +33,49 @@ export default class Game {
     this.dealerRevealed = true;
   }
 
-  toObject() {
-    return {
-      deckId: this.deckId,
-    };
+  ChangeTurn() {
+    this.whosTurn = (this.whosTurn === PlayerType.Dealer) ? PlayerType.Player : PlayerType.Dealer;
   }
+
+  calculateHandValue = (hand: Card[]) => {
+    let value = 0;
+    let hasAce = false;
+
+    for (let card of hand) {
+      // sommer la valeur de chaque carte
+      value += Math.min(card.value, 10);
+
+      // si carte c'est un ace set hasAce
+      if (card.value === 1) {
+        hasAce = true;
+      }
+    }
+    // si ace et ne bust pas la main, ajouter
+    if (hasAce && value + 10 <= 21) {
+      value += 10;
+    }
+
+    return value;
+  }
+
+  determineWinner() {
+    const playerPoints = this.calculateHandValue(this.playerHand);
+    const dealerPoints = this.calculateHandValue(this.dealerHand);
+
+    if (playerPoints > 21) {
+      this.gameWinner = PlayerType.Dealer;
+    } else if (dealerPoints > 21) {
+      this.gameWinner = PlayerType.Player;
+    } else if (dealerPoints > playerPoints) {
+      this.gameWinner = PlayerType.Dealer;
+    } else if (playerPoints > dealerPoints) {
+      this.gameWinner = PlayerType.Player;
+    } else {
+      this.gameWinner = null;
+    }
+    this.gameEnded = true;
+  }
+  
 }
 
 // const [gameOver, setGameOver] = useState(false);

@@ -18,7 +18,7 @@ export default class Card {
 
     toString() {
       const suitSymbol = {
-        "C": "♣",
+        "C": "♣",&
         "D": "♦",
         "H": "♥",
         "S": "♠",
