@@ -12,10 +12,10 @@ describe('Game', () => {
         const queen = new Card("QUEEN", "CLUBS");
         const jack = new Card("JACK", "CLUBS");
 
-        expect(ace.getRealValue()).toEqual(1);
-        expect(king.getRealValue()).toEqual(10);
-        expect(queen.getRealValue()).toEqual(10);
-        expect(jack.getRealValue()).toEqual(10);
+        expect(ace.GetRealValue()).toEqual(1);
+        expect(king.GetRealValue()).toEqual(10);
+        expect(queen.GetRealValue()).toEqual(10);
+        expect(jack.GetRealValue()).toEqual(10);
     });
 
 });

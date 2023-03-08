@@ -1,32 +1,23 @@
 import Card from "../../classes/Card";
-import Game from "../../classes/Game";
 import { PlayerType } from "../../classes/PlayerType";
 import { DRAW_CARD, SET_DECK, START_GAME } from "../constants"
 
 const initialState = {
     deckId: "",
     playerHand: [],
-    dealerHand: []
+    dealerHand: [],
+    gameWinner: PlayerType.Dealer,
+    gameEnded: false,
+    playerTotal: 0
 }
 
-
-const drawCardAndUpdateHand = (state, card, player) => {
-    const { cardImage, cardValue, cardSuit } = card;
-    const updatedPlayerHand = [...state.playerHand];
-    const updatedDealerHand = [...state.dealerHand];
-  
-    if (player === PlayerType.Player) {
-        updatedPlayerHand.push({ value: cardValue, suit: cardSuit });
-    } else {
-        updatedDealerHand.push({ value: cardValue, suit: cardSuit });
-    }
-  
+const EndOfGame = (state, player) => {
     return {
         ...state,
-        playerHand: updatedPlayerHand,
-        dealerHand: updatedDealerHand
+        gameEnded: true,
+        gameWinner: player    
     };
-  };
+}
   
   export default wjReducer = (state = initialState, action) => {
       switch (action.type) {
@@ -37,8 +28,31 @@ const drawCardAndUpdateHand = (state, card, player) => {
               };
 
           case DRAW_CARD:
-              return drawCardAndUpdateHand(state, action.payload, action.player);
-        
+            if(action.payload.player == PlayerType.Player) {
+                
+                // take the current hand and add new card
+                let newHand: Card[] = [...state.playerHand];
+                newHand.push(action.payload)
+                
+                // check for win
+                /* NOT ACTUAL CARD BEEING PASSED*/
+                if(CalculateHandValue(newHand) == 21) {
+                    return EndOfGame(state, PlayerType.Player)
+                } else {
+                    console.warn("cocou");
+                    return {
+                        
+                        ...state,
+                        playerHand: newHand,
+                        dealerHand: newHand
+                    };
+                } 
+            } else {
+                return {
+                    ...state
+                }
+            }
+                
         
           case START_GAME:
             //console.warn("reducing...")
@@ -58,23 +72,56 @@ const drawCardAndUpdateHand = (state, card, player) => {
                 newDealerHand.push({ value: value, suit: suit });
             }
 
-            return {
-            ...state,
-            playerHand: newPlayerHand,
-            dealerHand: newDealerHand
-            };
+            // now we calculate the initial scores to check for an early blackjack:
+            let playerScore = CalculateHandValue(newPlayerHand);
+            let dealerScore = CalculateHandValue(newDealerHand);
+
+            // if the player has instant blackJack, the game ends
+            if(playerScore == 21) {
+               return EndOfGame(state, PlayerType.Player)
+            } else {
+                return {
+                    ...state,
+                    playerHand: newPlayerHand,
+                    dealerHand: newDealerHand
+                };
+            }
               
           default:
               return state;
       }
   }
 
-  function updateHand(hand, card, player) {
-    const updatedHand = [...hand];
-    if (player === PlayerType.Player) {
-      updatedHand.push(card);
-    } else {
-      updatedHand.push(card);
+/* FUNCTIONS TO HANDLE GAME LOGIC */
+
+function CalculateHandValue (hand: Card[]): number{
+console.warn("coucou5");
+let value = 0;
+let hasAce = false;
+
+for (let card of hand) {
+
+    // sommer la valeur de chaque carte
+    value += Math.min(card.GetRealValue(), 10);
+
+    // si carte c'est un ace set hasAce
+    if (card.GetRealValue() == 1) {
+    hasAce = true;
     }
-    return updatedHand;
-  }
+}
+// si ace et ne bust pas la main, ajouter
+if (hasAce && value + 10 <= 21) {
+    value += 10;
+}
+
+return value;
+}
+
+/* USE CASES :
+
+# Game starts:
+- player gets 21 => blackjack
+- plater gets less then 21 => can hit or stand
+
+
+*/

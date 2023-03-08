@@ -6,7 +6,7 @@ export default class Card {
     constructor(value: number, suit: string) {
       this.value = value;
       this.suit = suit;
-      this.image = `https://deckofcardsapi.com/static/img/${value}${suit.charAt(0).toUpperCase}.svg`;
+      this.image = `https://deckofcardsapi.com/static/img/${value}${suit.charAt(0).toUpperCase()}.svg`;
     }
 
     GetRealValue() : number {

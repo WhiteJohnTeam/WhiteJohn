@@ -36,7 +36,7 @@ export default function PlayScreen({ navigation}) {
     setGame(new Game(deckId, playerHand, dealerHand));
   }, [deckId, playerHand, dealerHand]);
 
-  const playerDraw = async () => {
+  const hit = async () => {
     try {
       //@ts-ignore
       await dispatch(fetchCard(PlayerType.Player, deckId));
@@ -189,13 +189,16 @@ export default function PlayScreen({ navigation}) {
           ))}
         </View>
 
-        {/* Player's choices for each round */}
+        {/* Player's choices for each turn */}
+        {/* HIT BUTTON * ----------------------------- */}
         <View style={styles.middle}>
           <TouchableOpacity style={styles.choice}
-          onPress={() => playerDraw()}
+          onPress={() => 
+            hit()}
           >
             <Text style={styles.text_choice}>HIT</Text>
           </TouchableOpacity>
+          {/* STAND BUTTON * ----------------------------- */}
           <Text style={styles.text_middle}>Win Streak :</Text>
           <TouchableOpacity style={styles.choice}>
             <Text style={styles.text_choice}>STAND</Text>

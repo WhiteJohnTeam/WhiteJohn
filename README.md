@@ -49,21 +49,16 @@ WhiteJohn is a mobile application which will help you maximize your odds when pl
 
 ## Ressources
 
-- Time
-    - 30 January to March 2023    
-</br>
-- Material
-    - Monitors with Linux and Yarn configuration   
-    - Expo Go on mobile phone   
-</br>          
-- Languages used       
-    ![](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)   
-    ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)     
-    ![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)   
+### Time
+- 30 January to March 2023    
+
+      
+ ### Technology
+
+![](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)   
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)     
+![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)   
     
-</br> 
-- Team 
-    - 2 students in BUT Informatique
 
 *******
 
@@ -73,7 +68,7 @@ WhiteJohn is a mobile application which will help you maximize your odds when pl
 
 <div id='auteurs'/>
 
-## Autors
+## Authors
 
-Students Second Year - BUT Informatique - IUT Clermont Auvergne - 2022-2023   
+Second Year Computer Science Bachelor students at the IUT Clermont Auvergne   
 `BRODA Lou` - `FRANCO Nicolas`

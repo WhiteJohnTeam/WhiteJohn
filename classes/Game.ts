@@ -29,10 +29,6 @@ export default class Game {
     }
   }
 
-  Hit(card: Card) : void {
-    this.playerHand.push(card);
-  }
-
   Stand() : void {
     this.whosTurn = PlayerType.Player;
   }
