@@ -12,7 +12,8 @@
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
     "@react-navigation/bottom-tabs": "^6.5.4",
-    "@react-navigation/native": "^6.1.5",
+    "@react-navigation/drawer": "^6.6.2",
+    "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.15",
     "@reduxjs/toolkit": "^1.9.3",
     "deck-of-cards": "^0.1.8",
