@@ -3,34 +3,18 @@ export default class Card {
     suit: string;
     image: string;
   
-    constructor(value: number, suit: string, image: string) {
+    constructor(value: number, suit: string) {
       this.value = value;
       this.suit = suit;
-      this.image = image;
+      this.image = `https://deckofcardsapi.com/static/img/${value}${suit.charAt(0).toUpperCase}.svg`;
     }
 
-    toObject() {
-      return {
-        value : this.value, 
-        suit : this.suit
-      }
-    }
-
-    toString() {
-      const suitSymbol = {
-        "C": "♣",&
-        "D": "♦",
-        "H": "♥",
-        "S": "♠",
-      }[this.suit];
-      const valueString = {
-        1: "Ace",
-        11: "Jack",
-        12: "Queen",
-        13: "King",
-      }[this.value] || this.value.toString();
-    
-      return `${valueString} of ${suitSymbol}`;
+    GetRealValue() : number {
+      if(this.value == "ACE")
+        return 1;
+      else if(this.value == "KING" || this.value == "QUEEN" || this.value == "JACK") 
+        return 10;
+      return this.value;
     }
 }
  

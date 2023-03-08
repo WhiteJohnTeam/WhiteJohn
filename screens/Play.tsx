@@ -9,7 +9,6 @@ import { fetchFour } from "../redux/thunks/fetchFour";
 import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
-import Deck from 'deck-of-cards';
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);

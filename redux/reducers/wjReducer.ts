@@ -16,9 +16,9 @@ const drawCardAndUpdateHand = (state, card, player) => {
     const updatedDealerHand = [...state.dealerHand];
   
     if (player === PlayerType.Player) {
-        updatedPlayerHand.push({ image: cardImage, value: cardValue, suit: cardSuit });
+        updatedPlayerHand.push({ value: cardValue, suit: cardSuit });
     } else {
-        updatedDealerHand.push({ image: cardImage, value: cardValue, suit: cardSuit });
+        updatedDealerHand.push({ value: cardValue, suit: cardSuit });
     }
   
     return {
@@ -49,13 +49,13 @@ const drawCardAndUpdateHand = (state, card, player) => {
             for (let i = 0; i < 2; i++) {
                 const { value, suit } = action.payload[i];
                 //console.warn("card: ", value)
-                newPlayerHand.push({ image: "", value: value, suit: suit });
+                newPlayerHand.push({ value: value, suit: suit });
             }
 
             // Draw two cards for the dealer
             for (let i = 2; i < 4; i++) {
                 const { value, suit } = action.payload[i];
-                newDealerHand.push({ image: "", value: value, suit: suit });
+                newDealerHand.push({ value: value, suit: suit });
             }
 
             return {

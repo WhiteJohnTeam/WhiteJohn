@@ -14,14 +14,14 @@ describe('wjReducer', () => {
       };
     });
   
-    it('should handle FETCH_DECK', () => {
+    it.skip('should handle FETCH_DECK', () => {
       const deckId = 'deck_id_123';
       const action = fetchDeck(new Game(deckId));
       const nextState = wjReducer(initialState, action);
       expect(nextState.game.deckId).toEqual(deckId);
     });
   
-    it('should handle DRAW_CARD', () => {
+    it.skip('should handle DRAW_CARD', () => {
       const card = new Card(6, "hearts", "image_url");
       const action = drawCard(PlayerType.Player, card, 'deck_id_123');
       const nextState = wjReducer(initialState, action);

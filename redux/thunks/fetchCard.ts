@@ -24,7 +24,7 @@ export const fetchCard = (who : PlayerType, deck_id: string) => {
 
             try {
                 console.warn("value: ", card_info.value)
-                dispatch(drawCard(card_info.images.svg, card_info.value, card_info.suit, who))
+                dispatch(drawCard(card_info.value, card_info.suit, who))
               } catch (error) {
                 console.error(error);
               }

@@ -29,24 +29,33 @@ export default class Game {
     }
   }
 
-  Reveal() {
+  Hit(card: Card) : void {
+    this.playerHand.push(card);
+  }
+
+  Stand() : void {
+    this.whosTurn = PlayerType.Player;
+  }
+
+  Reveal() : void {
     this.dealerRevealed = true;
   }
 
-  ChangeTurn() {
+    // might be useless
+  ChangeTurn() : void {
     this.whosTurn = (this.whosTurn === PlayerType.Dealer) ? PlayerType.Player : PlayerType.Dealer;
   }
 
-  calculateHandValue = (hand: Card[]) => {
+  CalculateHandValue = (hand: Card[]) => {
     let value = 0;
     let hasAce = false;
 
     for (let card of hand) {
       // sommer la valeur de chaque carte
-      value += Math.min(card.value, 10);
+      value += Math.min(card.GetRealValue(), 10);
 
       // si carte c'est un ace set hasAce
-      if (card.value === 1) {
+      if (card.GetRealValue() == 1) {
         hasAce = true;
       }
     }
@@ -58,9 +67,9 @@ export default class Game {
     return value;
   }
 
-  determineWinner() {
-    const playerPoints = this.calculateHandValue(this.playerHand);
-    const dealerPoints = this.calculateHandValue(this.dealerHand);
+  DetermineWinner() {
+    const playerPoints = this.CalculateHandValue(this.playerHand);
+    const dealerPoints = this.CalculateHandValue(this.dealerHand);
 
     if (playerPoints > 21) {
       this.gameWinner = PlayerType.Dealer;
@@ -76,76 +85,15 @@ export default class Game {
     this.gameEnded = true;
   }
   
+   RestartGame() {
+    // Reset the player and dealer hands
+    this.playerHand = [];
+    this.dealerHand = [];
+
+    this.dealerRevealed = false;
+    this.whosTurn = PlayerType.Player;
+    this.playerTotalPoints = 0;
+    this.dealerTotalPoints = 0;
+  };
+
 }
-
-// const [gameOver, setGameOver] = useState(false);
-// const [turn, setTurn] = useState(PlayerType.Player);
-// const [winner, setWinner] = useState("");
-
-
-// const stand = () => {
-//   setTurn(PlayerType.Dealer);
-// };
-
-// const calculateHandValue = (hand: Card[]) => {
-//     let value = 0;
-//     let hasAce = false;
-//     for (let card of hand) {
-//     if (card.value.toString() === "A") {
-//     hasAce = true;
-//     }
-//     value += card.getValue();
-//     }
-//     if (hasAce && value <= 11) {
-//     value += 10; // Ace can be worth 1 or 11, depending on the total hand value
-//     }
-//     return value;
-// };
-
-// const determineWinner = (playerHand: Card[], dealerHand: Card[]) => {
-// const playerHandValue = calculateHandValue(playerHand);
-// const dealerHandValue = calculateHandValue(dealerHand);
-// if (playerHandValue > 21) {
-//     return PlayerType.Dealer; // Player busts
-// } else if (dealerHandValue > 21) {
-//     return PlayerType.Player; // Dealer busts
-// } else if (playerHandValue > dealerHandValue) {
-//     return PlayerType.Player; // Player has a higher hand value than dealer
-// } else if (dealerHandValue > playerHandValue) {
-//     return PlayerType.Dealer; // Dealer has a higher hand value than player
-// } else {
-//     return "tie"; // The hands are equal in value
-// }
-// };
-
-// const isGameOver = (playerHand: Card[], dealerHand: Card[]) => {
-//     const playerHandValue = calculateHandValue(playerHand);
-//     const dealerHandValue = calculateHandValue(dealerHand);
-//     if (playerHandValue > 21 || dealerHandValue > 21) {
-//     return true; // A player has busted
-//     } else if (playerHand.length === 5 || dealerHand.length === 5) {
-//     return true; // A player has a five-card hand
-//     } else if (playerHandValue === 21 || dealerHandValue === 21) {
-//     return true; // A player has a blackjack
-//     } else {
-//     return false; // The game continues
-//     }
-// };
-
-// const restartGame = () => {
-//     // Reset the player and dealer hands
-//     playerHand = [];
-//     dealerHand = [];
-//     // Reset the game state
-//     isPlaying = false;
-//     isGameOver = false;
-//     isDealerTurn = false;
-//     winner = "";
-// };
-
-// export {
-//     calculateHandValue,
-//     determineWinner,
-//     isGameOver,
-//     restartGame,
-// };
