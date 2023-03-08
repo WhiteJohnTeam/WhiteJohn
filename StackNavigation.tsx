@@ -1,8 +1,6 @@
 import { createStackNavigator, Header } from "@react-navigation/stack";
-import AboutScreen from "./screens/About";
 import HomeScreen from "./screens/Home";
 import PlayScreen from "./screens/Play";
-import SettingsScreen from "./screens/Settings";
 
 export default function StackNavigation() {
     const Stack = createStackNavigator();
