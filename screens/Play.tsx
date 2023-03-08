@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,16 +9,16 @@ import { fetchFour } from "../redux/thunks/fetchFour";
 import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
+import Deck from 'deck-of-cards';
 
-
-export default function PlayScreen() {
+export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
   const { dealerName } = useContext(DealerContext);
   
   const [showModal, setShowModal] = useState(true);
-  const colors = ["blue", "red", "gold", "green", "purple"];
-  const letters = ["H", "S", "P", "D", "R"];
+  const [showAnimation, setShowAnimation] = useState(false);
 
+  //@ts-ignore
   const { deckId, playerHand, dealerHand } = useSelector(state => state.wjReducer);
   const [game, setGame] = useState(new Game(deckId, playerHand, dealerHand)); // to update the game var each time state is updated
 
@@ -27,6 +27,7 @@ export default function PlayScreen() {
 
   useEffect(() => {
     const loadGame = async () => {
+    //@ts-ignore
      await dispatch(fetchDeck());;
     };
     loadGame();
@@ -38,6 +39,7 @@ export default function PlayScreen() {
 
   const playerDraw = async () => {
     try {
+      //@ts-ignore
       await dispatch(fetchCard(PlayerType.Player, deckId));
       //console.warn("what:", playerHand.length);
     } catch (error) {
@@ -46,12 +48,15 @@ export default function PlayScreen() {
   }    
 
   const Start = async () => {
-    setShowModal(false);
+
     try {
+      //@ts-ignore
       await dispatch(fetchFour(deckId));
     } catch (error) {
       console.error("Error:", error);
-    }
+    }    
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    setShowModal(false);
   } 
 
   const styles = StyleSheet.create({
@@ -135,17 +140,17 @@ export default function PlayScreen() {
       flexDirection: 'row',
       justifyContent: 'space-around',
       marginTop: 20,
-      width: '50%',
+      width: global.width/2,
     },
     button: {
       borderRadius: 20,
       padding: 10,
       elevation: 2,
-      width: '40%',
+      width: global.width/5,
     },
 
     buttonOpen: {
-      backgroundColor: '#2196F3',
+      backgroundColor: '#34C924',
     },
     buttonClose: {
       backgroundColor: '#f44336',
@@ -217,22 +222,36 @@ export default function PlayScreen() {
         <Modal animationType="slide" transparent={true} visible={showModal}>
           <View style={modalStyle.centeredView}>
             <View style={modalStyle.modalView}>
-              <Text style={modalStyle.modalText}>Ready to start?</Text>
-              <View style={modalStyle.buttonContainer}>
-                
-                <TouchableOpacity
-                  style={[modalStyle.button, modalStyle.buttonOpen]}
-                  onPress={() => Start()}
-                >
-                  <Text style={modalStyle.textStyle}>Start</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[modalStyle.button, modalStyle.buttonClose]}
-                  onPress={() => setShowModal(false)}
-                >
-                  <Text style={modalStyle.textStyle}>Cancel</Text>
-                </TouchableOpacity>
-              </View>
+              {showAnimation ? (
+                <View>
+                  <Image source={require('../assets/shuffle_deck.gif')} style={{width: 170, height: 100}} />
+                </View>
+              ) : (
+                <View>
+                  <Text style={modalStyle.modalText}>Ready to start?</Text>
+                  <View style={modalStyle.buttonContainer}>
+                    
+                    <TouchableOpacity
+                      style={[modalStyle.button, modalStyle.buttonOpen]}
+                      onPress={() => {
+                        setShowAnimation(true);
+                        Start();
+                      }}
+                    >
+                      <Text style={modalStyle.textStyle}>Start</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[modalStyle.button, modalStyle.buttonClose]}
+                      onPress={() => {
+                        setShowModal(false);
+                        navigation.navigate("Home")
+                      } }
+                    >
+                      <Text style={modalStyle.textStyle}>Cancel</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
             </View>
           </View>
         </Modal>
@@ -240,4 +259,3 @@ export default function PlayScreen() {
     </SafeAreaView>
   );
 }
-
