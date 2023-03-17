@@ -31,12 +31,14 @@ const EndOfGame = (state, player) => {
             if(action.payload.player == PlayerType.Player) {
                 
                 // take the current hand and add new card
-                let newHand: Card[] = [...state.playerHand];
-                newHand.push(action.payload)
+                let newHand : Card[] = [...state.playerHand];
+
+                console.warn("newHand: ", newHand);
+                newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
                 
                 // check for win
                 /* NOT ACTUAL CARD BEEING PASSED*/
-                if(CalculateHandValue(newHand) == 21) {
+                if(CalculateHandValue(newHand) == 21) {h
                     return EndOfGame(state, PlayerType.Player)
                 } else {
                     console.warn("cocou");
@@ -95,7 +97,7 @@ const EndOfGame = (state, player) => {
 /* FUNCTIONS TO HANDLE GAME LOGIC */
 
 function CalculateHandValue (hand: Card[]): number{
-console.warn("coucou5");
+//console.warn(hand);
 let value = 0;
 let hasAce = false;
 
