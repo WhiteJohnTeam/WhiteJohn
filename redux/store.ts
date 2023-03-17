@@ -8,6 +8,10 @@ const reducer = {
 
 // @ts-ignore
 const store = configureStore({
+  middleware: (getDefaultMiddleware) => 
+  getDefaultMiddleware({
+    serializableCheck: false,
+  }),
   reducer,
 },);
 

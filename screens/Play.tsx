@@ -9,6 +9,8 @@ import { fetchFour } from "../redux/thunks/fetchFour";
 import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
+import restartGame from "../redux/actions/restartGame";
+import { playerStands } from "../redux/actions/playerStands";
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -47,9 +49,9 @@ export default function PlayScreen({ navigation}) {
   }    
 
   const Start = async () => {
-
     try {
-      //@ts-ignore
+      await dispatch(restartGame())
+       //@ts-ignore
       await dispatch(fetchFour(deckId));
     } catch (error) {
       console.error("Error:", error);
@@ -57,6 +59,19 @@ export default function PlayScreen({ navigation}) {
     await new Promise(resolve => setTimeout(resolve, 1500));
     setShowModal(false);
   } 
+
+  const Stand = async () => {
+    try {
+      while(game.CalculateHandValue(playerHand) < 17){
+        //@ts-ignore
+        await dispatch(fetchCard(PlayerType.Dealer, deckId));
+      }
+      dispatch(playerStands());
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
 
   const styles = StyleSheet.create({
     play: {
@@ -171,6 +186,7 @@ export default function PlayScreen({ navigation}) {
 
   return (
     <SafeAreaView style={styles.play}>
+        <Text>Deck id: {deckId}</Text>
 
         <View style={styles.dealer}>
           <Image
@@ -242,6 +258,7 @@ export default function PlayScreen({ navigation}) {
                     >
                       <Text style={modalStyle.textStyle}>Start</Text>
                     </TouchableOpacity>
+
                     <TouchableOpacity
                       style={[modalStyle.button, modalStyle.buttonClose]}
                       onPress={() => {

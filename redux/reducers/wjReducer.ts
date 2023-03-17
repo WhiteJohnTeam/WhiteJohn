@@ -1,6 +1,6 @@
 import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
-import { DRAW_CARD, SET_DECK, START_GAME } from "../constants"
+import { DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
 
 const initialState = {
     deckId: "",
@@ -38,7 +38,7 @@ const EndOfGame = (state, player) => {
                 
                 // check for win
                 /* NOT ACTUAL CARD BEEING PASSED*/
-                if(CalculateHandValue(newHand) == 21) {h
+                if(CalculateHandValue(newHand) == 21) {
                     return EndOfGame(state, PlayerType.Player)
                 } else {
                     console.warn("cocou");
@@ -46,12 +46,15 @@ const EndOfGame = (state, player) => {
                         
                         ...state,
                         playerHand: newHand,
-                        dealerHand: newHand
                     };
                 } 
             } else {
+                let newHand = [...state.dealerHand];
+                newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
+            
                 return {
-                    ...state
+                    ...state,
+                    dealerHand: newHand
                 }
             }
                 
@@ -65,13 +68,13 @@ const EndOfGame = (state, player) => {
             for (let i = 0; i < 2; i++) {
                 const { value, suit } = action.payload[i];
                 //console.warn("card: ", value)
-                newPlayerHand.push({ value: value, suit: suit });
+                newPlayerHand.push(new Card(value, suit));
             }
 
             // Draw two cards for the dealer
             for (let i = 2; i < 4; i++) {
                 const { value, suit } = action.payload[i];
-                newDealerHand.push({ value: value, suit: suit });
+                newDealerHand.push(new Card(value, suit));
             }
 
             // now we calculate the initial scores to check for an early blackjack:
@@ -88,6 +91,25 @@ const EndOfGame = (state, player) => {
                     dealerHand: newDealerHand
                 };
             }
+
+            case RESTART_GAME:
+                return {
+                    ...state,
+                    playerHand: [],
+                    dealerHand: [],
+                    gameEnded: false,
+                    gameWinner: PlayerType.Dealer
+                };
+
+            case PLAYER_STANDS:
+                // check dealer score
+                // determine winner  
+                let delaerTotal = CalculateHandValue([...state.dealerHand]);
+                
+                return {
+
+                };
+
               
           default:
               return state;
