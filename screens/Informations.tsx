@@ -13,6 +13,12 @@ export default function InformationScreen() {
       backgroundColor: isDarkMode ? '#303030' : 'white',
     },
 
+    topTitle:{
+      fontSize: 35,
+      fontWeight: 'bold',
+      marginLeft: 10,
+    },
+
     title: {
       flex: 1,
       fontSize: 40,
@@ -43,6 +49,9 @@ export default function InformationScreen() {
     <SafeAreaView>   
       <ScrollView style={styles.container}>
           <View>
+            <View>
+              <Text style={styles.topTitle}>INFORMATIONS</Text>
+            </View>
             <View>
               <Image source={require('../assets/blackJack.png')} style={styles.image}/>
             </View>
