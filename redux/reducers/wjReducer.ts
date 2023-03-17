@@ -109,8 +109,7 @@ const EndOfGame = (state, player) => {
                 return {
 
                 };
-
-              
+    
           default:
               return state;
       }
