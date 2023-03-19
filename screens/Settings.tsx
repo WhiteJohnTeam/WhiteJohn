@@ -35,26 +35,28 @@ export default function SettingsScreen({ navigation }) {
   );
 
   const RightToLeftAnimation = ({ text }) => {
-    const translateX = useRef(new Animated.Value(-1000)).current;
+    const translateX = useRef(new Animated.Value(500)).current;
   
     useEffect(() => {
-      Animated.timing(
-        translateX,
-        {
-          toValue: 0,
-          duration: 1000,
-          useNativeDriver: true,
-        }
+      Animated.loop(
+        Animated.timing(
+          translateX,
+          {
+            toValue: -500,
+            duration: 10000,
+            useNativeDriver: true,
+          }
+        )
       ).start();
     }, [translateX]);
-
-    return(
+  
+    return (
       <Animated.Text style={{ transform: [{ translateX }] }}>
         {text}
       </Animated.Text>
-    )
-
-  }
+    );
+  };
+  
 
   const styles = StyleSheet.create({
 
@@ -245,16 +247,7 @@ export default function SettingsScreen({ navigation }) {
         <Text style={styles.sectionTitle}>Dark Mode</Text>
         <Switch value={isDarkMode} onValueChange={toggleTheme}/>
       </View>
-    </View>
 
-    <View>
-      {/* ICI ANIMATION */}
-    </View>
-
-    <View style={styles.bottom}>      
-      {/*<Image
-        style={styles.dealer_image}
-        source={require("../assets/dealer.png")}/>*/}
       <View style={styles.settingRow}>
         <Icon name="pencil" size={40} style={styles.icon} />
         <Text style={styles.sectionTitle}>Name your dealer</Text>
@@ -270,6 +263,10 @@ export default function SettingsScreen({ navigation }) {
             placeholderTextColor={switchColor}
           />
       </View>
+    </View>
+
+    <View>
+        <RightToLeftAnimation text="When the fun stops, stop." />
     </View>
          
     
