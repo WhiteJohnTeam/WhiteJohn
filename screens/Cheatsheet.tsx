@@ -17,6 +17,7 @@ export default function CheatSheetScreen() {
       fontSize: 35,
       fontWeight: 'bold',
       marginLeft: 10,
+      color: isDarkMode ? 'white' : '#303030',
     },
 
     textDescription: {

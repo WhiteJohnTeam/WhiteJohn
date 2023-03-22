@@ -31,7 +31,7 @@ export default function SettingsScreen({ navigation }) {
       <TouchableOpacity>
         <Image source={item.flag}/>
       </TouchableOpacity>    
-    </View>
+    </View> 
   );
 
   const RightToLeftAnimation = ({ text }) => {
@@ -42,7 +42,7 @@ export default function SettingsScreen({ navigation }) {
         Animated.timing(
           translateX,
           {
-            toValue: -500,
+            toValue: -1470,
             duration: 10000,
             useNativeDriver: true,
           }
@@ -51,7 +51,7 @@ export default function SettingsScreen({ navigation }) {
     }, [translateX]);
   
     return (
-      <Animated.Text style={{ transform: [{ translateX }] }}>
+      <Animated.Text style={{ transform: [{ translateX }], color: switchColor, fontSize: 20,}} numberOfLines={1}>
         {text}
       </Animated.Text>
     );
@@ -84,6 +84,7 @@ export default function SettingsScreen({ navigation }) {
     topTitle:{
       fontSize: 35,
       fontWeight: 'bold',
+      color: switchColor,
     },
 
     dealer_image: {
@@ -265,8 +266,8 @@ export default function SettingsScreen({ navigation }) {
       </View>
     </View>
 
-    <View>
-        <RightToLeftAnimation text="When the fun stops, stop." />
+    <View style={{flexDirection: 'row', flexWrap: 'wrap', width:10000}}>
+        <RightToLeftAnimation text="Remember, the thrill of winning can quickly turn into the agony of addiction. Play responsibly and never bet more than you can afford to lose. When the fun stops, stop."/>
     </View>
          
     
