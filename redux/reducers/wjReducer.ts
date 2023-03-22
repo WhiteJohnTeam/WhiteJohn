@@ -102,13 +102,15 @@ const EndOfGame = (state, player) => {
                 };
 
             case PLAYER_STANDS:
+                console.warn("standing...");
                 // check dealer score
                 // determine winner  
                 let delaerTotal = CalculateHandValue([...state.dealerHand]);
-                
-                return {
-
-                };
+                if(delaerTotal > 21) {
+                    return EndOfGame(state, PlayerType.Dealer);
+                } else {
+                    return EndOfGame(state, PlayerType.Player);
+                }
     
           default:
               return state;

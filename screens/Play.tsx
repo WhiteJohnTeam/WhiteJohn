@@ -20,7 +20,7 @@ export default function PlayScreen({ navigation}) {
   const [showAnimation, setShowAnimation] = useState(false);
 
   //@ts-ignore
-  const { deckId, playerHand, dealerHand } = useSelector(state => state.wjReducer);
+  const { deckId, playerHand, dealerHand, gameEnded, gameWinner } = useSelector(state => state.wjReducer);
   const [game, setGame] = useState(new Game(deckId, playerHand, dealerHand)); // to update the game var each time state is updated
 
 
@@ -71,7 +71,6 @@ export default function PlayScreen({ navigation}) {
       console.error("Error:", error);
     }
   }
-
 
   const styles = StyleSheet.create({
     play: {
