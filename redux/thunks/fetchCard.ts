@@ -23,7 +23,6 @@ export const fetchCard = (who : PlayerType, deck_id: string) => {
             const card_info = cardJson.cards[0];
 
             try {
-                console.warn("value: ", card_info.value)
                 dispatch(drawCard(card_info.value, card_info.suit, who))
               } catch (error) {
                 console.error(error);

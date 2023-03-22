@@ -16,6 +16,7 @@ export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
   const { dealerName } = useContext(DealerContext);
   
+  // start game pop-up and shuffling animation
   const [showModal, setShowModal] = useState(true);
   const [showAnimation, setShowAnimation] = useState(false);
 
@@ -46,7 +47,14 @@ export default function PlayScreen({ navigation}) {
     } catch (error) {
       console.error("Error:", error);
     }
-  }    
+  }  
+  
+  useEffect(() => {
+    if (gameEnded) {
+      setShowModal(true);
+      setShowAnimation(false);
+    }
+  })  
 
   const Start = async () => {
     try {
@@ -60,13 +68,10 @@ export default function PlayScreen({ navigation}) {
     setShowModal(false);
   } 
 
+    
   const Stand = async () => {
     try {
-      while(game.CalculateHandValue(playerHand) < 17){
-        //@ts-ignore
-        await dispatch(fetchCard(PlayerType.Dealer, deckId));
-      }
-      dispatch(playerStands());
+      dispatch(playerStands(dealerHand, deckId));
     } catch (error) {
       console.error("Error:", error);
     }
@@ -186,6 +191,7 @@ export default function PlayScreen({ navigation}) {
   return (
     <SafeAreaView style={styles.play}>
         <Text>Deck id: {deckId}</Text>
+        <Text>Game ended: {gameEnded}</Text>
 
         <View style={styles.dealer}>
           <Image
@@ -215,7 +221,11 @@ export default function PlayScreen({ navigation}) {
           </TouchableOpacity>
           {/* STAND BUTTON * ----------------------------- */}
           <Text style={styles.text_middle}>Win Streak :</Text>
-          <TouchableOpacity style={styles.choice}>
+          <TouchableOpacity style={styles.choice}
+          onPress={() =>
+            Stand()}
+          >
+
             <Text style={styles.text_choice}>STAND</Text>
           </TouchableOpacity>
         </View>
@@ -268,6 +278,12 @@ export default function PlayScreen({ navigation}) {
                       <Text style={modalStyle.textStyle}>Cancel</Text>
                     </TouchableOpacity>
                   </View>
+                </View>
+              )}
+              {gameEnded && (
+                <View>
+                  <Text style={modalStyle.modalText}>Game Ended</Text>
+                  <Text style={modalStyle.modalText}>Winner: {gameWinner}</Text>
                 </View>
               )}
             </View>

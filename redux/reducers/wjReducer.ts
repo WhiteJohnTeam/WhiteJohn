@@ -33,15 +33,15 @@ const EndOfGame = (state, player) => {
                 // take the current hand and add new card
                 let newHand : Card[] = [...state.playerHand];
 
-                console.warn("newHand: ", newHand);
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
-                
-                // check for win
-                /* NOT ACTUAL CARD BEEING PASSED*/
+
+                console.warn("checking for win ? ", newHand);
                 if(CalculateHandValue(newHand) == 21) {
-                    return EndOfGame(state, PlayerType.Player)
-                } else {
-                    console.warn("cocou");
+                    return EndOfGame(state, PlayerType.Player);
+                } else if(CalculateHandValue(newHand) > 21) {
+                    return EndOfGame(state, PlayerType.Dealer);
+                }
+                {
                     return {
                         
                         ...state,
@@ -49,6 +49,7 @@ const EndOfGame = (state, player) => {
                     };
                 } 
             } else {
+                console.warn("dealer draw")
                 let newHand = [...state.dealerHand];
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
             
@@ -101,17 +102,27 @@ const EndOfGame = (state, player) => {
                     gameWinner: PlayerType.Dealer
                 };
 
-            case PLAYER_STANDS:
+            case PLAYER_STANDS:  
+
                 console.warn("standing...");
                 // check dealer score
                 // determine winner  
-                let delaerTotal = CalculateHandValue([...state.dealerHand]);
-                if(delaerTotal > 21) {
-                    return EndOfGame(state, PlayerType.Dealer);
-                } else {
-                    return EndOfGame(state, PlayerType.Player);
+                let delaerTotal = CalculateHandValue(action.payload.dealerHand);
+                let playerTotal = CalculateHandValue([...state.playerHand]);
+                switch(true) {
+                    case playerTotal > 21:
+                        return EndOfGame(state, PlayerType.Dealer);
+
+                    case delaerTotal > 21 :
+                        return EndOfGame(state, PlayerType.Player);
+                        
+                    case delaerTotal > playerTotal:
+                        return EndOfGame(state, PlayerType.Dealer);
+
+                    case playerTotal > delaerTotal:
+                        return EndOfGame(state, PlayerType.Player);
                 }
-    
+
           default:
               return state;
       }
@@ -119,27 +130,27 @@ const EndOfGame = (state, player) => {
 
 /* FUNCTIONS TO HANDLE GAME LOGIC */
 
-function CalculateHandValue (hand: Card[]): number{
-//console.warn(hand);
-let value = 0;
-let hasAce = false;
+export function CalculateHandValue (hand: Card[]): number{
+    //console.warn(hand);
+    let value = 0;
+    let hasAce = false;
 
-for (let card of hand) {
+    for (let card of hand) {
 
-    // sommer la valeur de chaque carte
-    value += Math.min(card.GetRealValue(), 10);
+        // sommer la valeur de chaque carte
+        value += Math.min(card.GetRealValue(), 10);
 
-    // si carte c'est un ace set hasAce
-    if (card.GetRealValue() == 1) {
-    hasAce = true;
+        // si carte c'est un ace set hasAce
+        if (card.GetRealValue() == 1) {
+        hasAce = true;
+        }
     }
-}
-// si ace et ne bust pas la main, ajouter
-if (hasAce && value + 10 <= 21) {
-    value += 10;
-}
+    // si ace et ne bust pas la main, ajouter
+    if (hasAce && value + 10 <= 21) {
+        value += 10;
+    }
 
-return value;
+    return value;
 }
 
 /* USE CASES :
