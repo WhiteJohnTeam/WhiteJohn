@@ -71,6 +71,10 @@ WhiteJohn is a mobile application which will help you maximize your odds when pl
 
 ## Sketches
 
+    ![](https://www.canva.com/design/DAFY2ryev9M/G4miZcC6bDw0IBEqXj71dw/view?utm_content=DAFY2ryev9M&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+
+*******
+
 <div id='auteurs'/>
 
 ## Autors
