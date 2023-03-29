@@ -141,7 +141,7 @@ export default function PlayScreen({ navigation}) {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     modalView: {
-      backgroundColor: 'white',
+      backgroundColor: isDarkMode ? "#303030" : "white",
       borderRadius: 20,
       padding: 35,
       alignItems: 'center',
@@ -153,6 +153,10 @@ export default function PlayScreen({ navigation}) {
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+    },
+    text_shuffle: {
+      color: isDarkMode ? "white" : "#303030",
+      alignSelf: 'center',
     },
     buttonContainer: {
       flexDirection: 'row',
@@ -174,11 +178,12 @@ export default function PlayScreen({ navigation}) {
       backgroundColor: '#f44336',
     },
     textStyle: {
-      color: 'white',
+      color: "white",
       fontWeight: 'bold',
       textAlign: 'center',
     },
     modalText: {
+      color: isDarkMode ? "white" : "#303030",
       marginBottom: 15,
       textAlign: 'center',
       fontWeight: 'bold',
@@ -251,11 +256,12 @@ export default function PlayScreen({ navigation}) {
             <View style={modalStyle.modalView}>
               {showAnimation ? (
                 <View>
-                  <Image source={require('../assets/shuffle_deck.gif')} style={{width: 170, height: 100}} />
+                  <Text style={modalStyle.text_shuffle}>Shuffling...</Text>
+                  <Image source={require('../assets/deck_shuffle.gif')} style={{width: 150, height: 80}} />
                 </View>
               ) : (
                 <View>
-                  <Text style={modalStyle.modalText}>Ready to start?</Text>
+                  <Text style={modalStyle.modalText}>Ready to start ?</Text>
                   <View style={modalStyle.buttonContainer}>
                     
                     <TouchableOpacity

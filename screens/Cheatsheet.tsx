@@ -13,6 +13,13 @@ export default function CheatSheetScreen() {
       backgroundColor: isDarkMode ? '#303030' : 'white',
     },
 
+    topTitle:{
+      fontSize: 35,
+      fontWeight: 'bold',
+      marginLeft: 10,
+      color: isDarkMode ? 'white' : '#303030',
+    },
+
     textDescription: {
       alignItems: 'center',
       textAlign: 'justify',
@@ -34,6 +41,9 @@ export default function CheatSheetScreen() {
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
+          <View>
+            <Text style={styles.topTitle}>CHEATSHEET</Text>
+          </View>
           <View>
             <Text style={styles.textDescription}>Casino games has been designed to make players lose in the long run. To make the best of the situation and increase players’ chances of winning the game, gamblers are always looking for various solutions to reduce the house edge. This is why the blackjack cheat sheet has become popular among players. By having the cheat sheet and knowing how to use it, you can easily increase your chances of winning if you are planning on playing a game against the dealer.</Text>
             <Image source={require('../assets/cheatSheet.png')} style={styles.image}/>
