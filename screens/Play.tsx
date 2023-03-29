@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
 import restartGame from "../redux/actions/restartGame";
 import { playerStands } from "../redux/actions/playerStands";
+import { FlatList } from "react-native-gesture-handler";
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -79,6 +80,25 @@ export default function PlayScreen({ navigation}) {
     }
   }
 
+  // const STUB_CARD_LIST = [
+  //   { id: '1', image: 'https://deckofcardsapi.com/static/img/6H.png' },
+  //   { id: '2', image: 'https://deckofcardsapi.com/static/img/5S.png' },
+  //   { id: '3', image: 'https://deckofcardsapi.com/static/img/7H.png' },
+  //   { id: '4', image: 'https://deckofcardsapi.com/static/img/3S.png' },
+  //   { id: '5', image: 'https://deckofcardsapi.com/static/img/8H.png' },
+  //   { id: '6', image: 'https://deckofcardsapi.com/static/img/QS.png' },
+  // ];
+
+  const renderCard = ({ item }) => {
+    if (!item || !item.image) {
+      return null;
+    }
+    return
+    <View>
+      <Image source={{uri: item.image}} style={styles.card_image}/>
+    </View> 
+  };
+
   const styles = StyleSheet.create({
     play: {
       flex: 1,
@@ -102,6 +122,11 @@ export default function PlayScreen({ navigation}) {
       fontSize: 25,
       color: isDarkMode ? "white" : "#303030",
       maxWidth: global.width/2 - 20,
+    },
+
+    card_image: {
+      width: 70,
+      height: 100,
     },
 
     middle: {
@@ -215,13 +240,14 @@ export default function PlayScreen({ navigation}) {
               {index < game.dealerHand.length - 1 ? ", " : ""}
             </Text>
           ))}
+          <FlatList            
+            horizontal={true}
+            data={dealerHand}
+            renderItem={({ item }) => renderCard(item)}
+            keyExtractor={item => item.id}
+          />
         </View>
 
-        <View style={styles.middle}>
-          <Svg width={200} height={200}>
-            <SvgUri uri='https://deckofcardsapi.com/static/img/6H.svg' />
-          </Svg>
-        </View>
 
         {/* Player's choices for each turn */}
         {/* HIT BUTTON * ----------------------------- */}
