@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
+import { Svg, SvgUri } from 'react-native-svg';
+
 import { fetchCard } from "../redux/thunks/fetchCard";
 import fetchDeck from "../redux/thunks/fetchDeck";
 import { PlayerType } from "../classes/PlayerType";
@@ -213,6 +215,12 @@ export default function PlayScreen({ navigation}) {
               {index < game.dealerHand.length - 1 ? ", " : ""}
             </Text>
           ))}
+        </View>
+
+        <View style={styles.middle}>
+          <Svg width={200} height={200}>
+            <SvgUri uri='https://deckofcardsapi.com/static/img/6H.svg' />
+          </Svg>
         </View>
 
         {/* Player's choices for each turn */}
