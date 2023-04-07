@@ -2,7 +2,7 @@ import React, { useRef, useContext, useEffect, useState } from 'react';
 import { ColorContext } from '../context/ColorContext';
 import { DealerContext } from '../context/DealerContext';
 
-import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList, Modal, Animated } from 'react-native';
+import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList, Modal, Animated, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,6 +14,8 @@ export default function SettingsScreen({ navigation }) {
   const [text, setText] = useState<string>('');
   const [languageListVisible, setLanguageListVisible] = useState(false);
   const [showModal, setShowModal] = useState(true);
+  const [placeholder, setPlaceholder] = useState('Choose the name of your dealer...');
+  const { width } = Dimensions.get('window');
 
   const switchColor = isDarkMode ? 'white' : '#303030'
 
@@ -55,6 +57,7 @@ export default function SettingsScreen({ navigation }) {
       AsyncStorage.getItem('dealerName').then(value => {
         if (value !== null) {
           setDealerName(value);
+          setPlaceholder(value);
         }
       });
     }, []);
@@ -66,6 +69,10 @@ export default function SettingsScreen({ navigation }) {
     );
   };
   
+  const handleSubmitEditing = () => {
+    setDealerName(text);
+    AsyncStorage.setItem('dealerName', text);
+  };
 
   const styles = StyleSheet.create({
 
@@ -114,12 +121,14 @@ export default function SettingsScreen({ navigation }) {
     },
   
     input: {
+      width: width*0.8,
       height: 40,
       margin: 12,
       borderColor: isDarkMode ? 'white' : '#303030',
       borderWidth: 1,
       padding: 10,
       color: isDarkMode ? 'white' : '#303030',
+      textAlign: 'center'
     },
 
     icon: {
@@ -264,12 +273,9 @@ export default function SettingsScreen({ navigation }) {
       </View>
       <View>
           <TextInput
-            placeholder="Choose the name of your dealer..."
+            placeholder={placeholder}
             onChangeText={newText => setText(newText)}
-            onSubmitEditing={() => {
-              setDealerName(text);
-              AsyncStorage.setItem('dealerName', text);
-            }}
+            onSubmitEditing={handleSubmitEditing}
             value={text}   
             style={styles.input}
             cursorColor={switchColor}

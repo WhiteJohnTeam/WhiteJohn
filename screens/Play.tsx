@@ -84,7 +84,6 @@ export default function PlayScreen({ navigation}) {
     if (!item || !item.image) {
       return null;
     }
-    console.log("rendering card with image URL: ", item.image);
     const newImageUrl = item.image.replace(".svg", ".png");
     return  <View>
               <Image source={{uri: newImageUrl}} style={styles.card_image}/>
