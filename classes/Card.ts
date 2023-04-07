@@ -16,5 +16,20 @@ export default class Card {
         return 10;
       return this.value;
     }
+
+    SuitToImage() : string { 
+      switch(this.value.toPrecision()) {
+        case "10": 
+          return "0"
+        case "KING":
+          return "K"
+        case "QUEEN":
+          return "Q"
+        case "JACK":
+          return "J"
+        case "ACE":
+          return "A"
+      }
+    }
 }
  

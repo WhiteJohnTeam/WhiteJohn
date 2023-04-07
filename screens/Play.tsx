@@ -6,11 +6,13 @@ import { fetchCard } from "../redux/thunks/fetchCard";
 import fetchDeck from "../redux/thunks/fetchDeck";
 import { PlayerType } from "../classes/PlayerType";
 import { fetchFour } from "../redux/thunks/fetchFour";
-import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal } from "react-native";
+import { StyleSheet, Text, Image, View, TouchableOpacity, ScrollView, Modal, FlatList } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Game from "../classes/Game";
 import restartGame from "../redux/actions/restartGame";
-import { playerStands } from "../redux/actions/playerStands";
+import { fetchAfterStand } from "../redux/thunks/dealerDrawUntilEnd";
+import CardItemList from "../components/cardItemList";
+import Card from "../classes/Card";
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -24,6 +26,10 @@ export default function PlayScreen({ navigation}) {
   const { deckId, playerHand, dealerHand, gameEnded, gameWinner } = useSelector(state => state.wjReducer);
   const [game, setGame] = useState(new Game(deckId, playerHand, dealerHand)); // to update the game var each time state is updated
 
+  /*
+  * Faire des composants pour l'affichage des cartes,
+  * delaerHand et playerHand.
+  */
 
   const dispatch = useDispatch();
 
@@ -41,7 +47,7 @@ export default function PlayScreen({ navigation}) {
 
   const hit = async () => {
     try {
-      //@ts-ignore
+      // @ts-ignore
       await dispatch(fetchCard(PlayerType.Player, deckId));
       //console.warn("what:", playerHand.length);
     } catch (error) {
@@ -64,6 +70,7 @@ export default function PlayScreen({ navigation}) {
     } catch (error) {
       console.error("Error:", error);
     }    
+    // temps pour montrer l'annimation
     await new Promise(resolve => setTimeout(resolve, 1500));
     setShowModal(false);
   } 
@@ -71,7 +78,9 @@ export default function PlayScreen({ navigation}) {
     
   const Stand = async () => {
     try {
-      dispatch(playerStands(dealerHand, deckId));
+      // @ts-ignore
+      await dispatch(fetchAfterStand(dealerHand, deckId));
+      //console.warn("dealerHand:", dealerHand);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -206,14 +215,10 @@ export default function PlayScreen({ navigation}) {
         </View>
 
         <View style={styles.middle}>
-          <Text>Player: </Text>
-          {game.dealerHand.map((card, index) => (
-            <Text key={index}>
-              {card.value} {card.suit}
-              {index < game.dealerHand.length - 1 ? ", " : ""}
-            </Text>
-          ))}
+          <Text>Dealer:</Text>
+          <FlatList data={game.dealerHand} renderItem={({item}) => <CardItemList items={[item]} />} />
         </View>
+        
 
         {/* Player's choices for each turn */}
         {/* HIT BUTTON * ----------------------------- */}
@@ -228,7 +233,8 @@ export default function PlayScreen({ navigation}) {
           <Text style={styles.text_middle}>Win Streak :</Text>
           <TouchableOpacity style={styles.choice}
           onPress={() =>
-            Stand()}
+            Stand() 
+          }
           >
 
             <Text style={styles.text_choice}>STAND</Text>

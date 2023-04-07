@@ -1,5 +1,3 @@
-import { Dispatch } from "redux";
-import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
 import drawCard from "../actions/drawCard";
 

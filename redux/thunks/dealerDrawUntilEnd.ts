@@ -1,15 +1,12 @@
-import { Dispatch } from "redux";
 import Card from "../../classes/Card";
-import { PlayerType } from "../../classes/PlayerType";
-import drawCard from "../actions/drawCard";
-import { playerStands } from "../actions/playerStands";
+import playerStands from "../actions/playerStands";
 import { CalculateHandValue } from "../reducers/wjReducer";
 
-export const fetchCard = (dealerHand: Card[], deck_id) => {
+export const fetchAfterStand = (dealerHand: Card[], deck_id) => {
     return async dispatch => {
         while(CalculateHandValue(dealerHand) < 17) {
             try {
-                console.log("fetch card started ...");
+                console.warn("PLAYER STANDS");
                 
                 const cardPromise = await fetch(`https://www.deckofcardsapi.com/api/deck/${deck_id}/draw/?deck_count=1`);
             

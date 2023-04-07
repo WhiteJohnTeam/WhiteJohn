@@ -12,11 +12,21 @@ const initialState = {
 }
 
 const EndOfGame = (state, player) => {
+    console.warn("game ended");
     return {
         ...state,
         gameEnded: true,
         gameWinner: player    
     };
+}
+
+const DealerWon = (state, newDealerHand) => {
+    console.warn("dealer won");
+    return {
+        ...state,
+        delearHand: newDealerHand,
+        gameWinner: PlayerType.Dealer
+    }
 }
   
   export default wjReducer = (state = initialState, action) => {
@@ -104,22 +114,25 @@ const EndOfGame = (state, player) => {
 
             case PLAYER_STANDS:  
 
-                console.warn("standing...");
-                // check dealer score
-                // determine winner  
+                console.warn("player stands");
+
                 let delaerTotal = CalculateHandValue(action.payload.dealerHand);
                 let playerTotal = CalculateHandValue([...state.playerHand]);
                 switch(true) {
                     case playerTotal > 21:
-                        return EndOfGame(state, PlayerType.Dealer);
+                        console.warn("1");
+                        return DealerWon(state, action.payload.dealerHand)
 
                     case delaerTotal > 21 :
+                        console.warn("2");
                         return EndOfGame(state, PlayerType.Player);
                         
                     case delaerTotal > playerTotal:
-                        return EndOfGame(state, PlayerType.Dealer);
+                        console.warn("3");
+                        return DealerWon(state, action.payload.dealerHand);
 
                     case playerTotal > delaerTotal:
+                        console.warn("4");
                         return EndOfGame(state, PlayerType.Player);
                 }
 
