@@ -80,23 +80,15 @@ export default function PlayScreen({ navigation}) {
     }
   }
 
-  // const STUB_CARD_LIST = [
-  //   { id: '1', image: 'https://deckofcardsapi.com/static/img/6H.png' },
-  //   { id: '2', image: 'https://deckofcardsapi.com/static/img/5S.png' },
-  //   { id: '3', image: 'https://deckofcardsapi.com/static/img/7H.png' },
-  //   { id: '4', image: 'https://deckofcardsapi.com/static/img/3S.png' },
-  //   { id: '5', image: 'https://deckofcardsapi.com/static/img/8H.png' },
-  //   { id: '6', image: 'https://deckofcardsapi.com/static/img/QS.png' },
-  // ];
-
   const renderCard = ({ item }) => {
     if (!item || !item.image) {
       return null;
     }
-    return
-    <View>
-      <Image source={{uri: item.image}} style={styles.card_image}/>
-    </View> 
+    console.log("rendering card with image URL: ", item.image);
+    const newImageUrl = item.image.replace(".svg", ".png");
+    return  <View>
+              <Image source={{uri: newImageUrl}} style={styles.card_image}/>
+            </View> 
   };
 
   const styles = StyleSheet.create({
@@ -233,20 +225,14 @@ export default function PlayScreen({ navigation}) {
         </View>
 
         <View style={styles.middle}>
-          <Text>Player: </Text>
-          {game.dealerHand.map((card, index) => (
-            <Text key={index}>
-              {card.value} {card.suit}
-              {index < game.dealerHand.length - 1 ? ", " : ""}
-            </Text>
-          ))}
           <FlatList            
             horizontal={true}
-            data={dealerHand}
-            renderItem={({ item }) => renderCard(item)}
-            keyExtractor={item => item.id}
+            data={game.dealerHand}
+            renderItem={({ item }) => renderCard({ item })}
+            keyExtractor={item => item.image}
           />
         </View>
+
 
 
         {/* Player's choices for each turn */}
@@ -271,13 +257,12 @@ export default function PlayScreen({ navigation}) {
 
         {/* Display all of the player's cards */}
         <View style={styles.middle}>
-          <Text>Player: </Text>
-          {game.playerHand.map((card, index) => (
-            <Text key={index}>
-              {card.value} {card.suit}
-              {index < game.playerHand.length - 1 ? ", " : ""}
-            </Text>
-          ))}
+          <FlatList            
+            horizontal={true}
+            data={game.playerHand}
+            renderItem={({ item }) => renderCard({ item })}
+            keyExtractor={item => item.image}
+          />
         </View>
 
         <View style={styles.down}>

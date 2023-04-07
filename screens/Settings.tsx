@@ -5,6 +5,7 @@ import { DealerContext } from '../context/DealerContext';
 import { StyleSheet, Text, TextInput, Image, View, TouchableOpacity, Switch, FlatList, Modal, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SettingsScreen({ navigation }) {
 
@@ -50,6 +51,14 @@ export default function SettingsScreen({ navigation }) {
       ).start();
     }, [translateX]);
   
+    useEffect(() => {
+      AsyncStorage.getItem('dealerName').then(value => {
+        if (value !== null) {
+          setDealerName(value);
+        }
+      });
+    }, []);
+
     return (
       <Animated.Text style={{ transform: [{ translateX }], color: switchColor, fontSize: 20,}} numberOfLines={1}>
         {text}
@@ -257,7 +266,10 @@ export default function SettingsScreen({ navigation }) {
           <TextInput
             placeholder="Choose the name of your dealer..."
             onChangeText={newText => setText(newText)}
-            onSubmitEditing={() => setDealerName(text)}
+            onSubmitEditing={() => {
+              setDealerName(text);
+              AsyncStorage.setItem('dealerName', text);
+            }}
             value={text}   
             style={styles.input}
             cursorColor={switchColor}
