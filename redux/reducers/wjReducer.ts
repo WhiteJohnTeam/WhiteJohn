@@ -8,11 +8,9 @@ const initialState = {
     dealerHand: [],
     gameWinner: PlayerType.Dealer,
     gameEnded: false,
-    playerTotal: 0
 }
 
 const EndOfGame = (state, player) => {
-    console.warn("game ended");
     return {
         ...state,
         gameEnded: true,
@@ -21,11 +19,11 @@ const EndOfGame = (state, player) => {
 }
 
 const DealerWon = (state, newDealerHand) => {
-    console.warn("dealer won");
     return {
         ...state,
-        delearHand: newDealerHand,
-        gameWinner: PlayerType.Dealer
+        dealerHand: newDealerHand,
+        gameWinner: PlayerType.Dealer,
+        gameEnded: true
     }
 }
   
@@ -45,7 +43,6 @@ const DealerWon = (state, newDealerHand) => {
 
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
 
-                console.warn("checking for win ? ", newHand);
                 if(CalculateHandValue(newHand) == 21) {
                     return EndOfGame(state, PlayerType.Player);
                 } else if(CalculateHandValue(newHand) > 21) {
@@ -59,7 +56,6 @@ const DealerWon = (state, newDealerHand) => {
                     };
                 } 
             } else {
-                console.warn("dealer draw")
                 let newHand = [...state.dealerHand];
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
             
@@ -71,14 +67,12 @@ const DealerWon = (state, newDealerHand) => {
                 
         
           case START_GAME:
-            //console.warn("reducing...")
             let newPlayerHand = [...state.playerHand];
             let newDealerHand = [...state.dealerHand];
 
             // Draw two cards for the player
             for (let i = 0; i < 2; i++) {
                 const { value, suit } = action.payload[i];
-                //console.warn("card: ", value)
                 newPlayerHand.push(new Card(value, suit));
             }
 
@@ -114,29 +108,25 @@ const DealerWon = (state, newDealerHand) => {
 
             case PLAYER_STANDS:  
 
-                console.warn("player stands");
-
                 let delaerTotal = CalculateHandValue(action.payload.dealerHand);
                 let playerTotal = CalculateHandValue([...state.playerHand]);
+
                 switch(true) {
                     case playerTotal > 21:
-                        console.warn("1");
                         return DealerWon(state, action.payload.dealerHand)
 
                     case delaerTotal > 21 :
-                        console.warn("2");
                         return EndOfGame(state, PlayerType.Player);
                         
                     case delaerTotal > playerTotal:
-                        console.warn("3");
                         return DealerWon(state, action.payload.dealerHand);
 
                     case playerTotal > delaerTotal:
-                        console.warn("4");
                         return EndOfGame(state, PlayerType.Player);
                 }
 
           default:
+             
               return state;
       }
   }
@@ -144,7 +134,6 @@ const DealerWon = (state, newDealerHand) => {
 /* FUNCTIONS TO HANDLE GAME LOGIC */
 
 export function CalculateHandValue (hand: Card[]): number{
-    //console.warn(hand);
     let value = 0;
     let hasAce = false;
 

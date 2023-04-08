@@ -6,7 +6,6 @@ export const fetchAfterStand = (dealerHand: Card[], deck_id) => {
     return async dispatch => {
       while (CalculateHandValue(dealerHand) < 17) {
         try {
-          console.warn("PLAYER STANDS");
           const cardPromise = await fetch(`https://www.deckofcardsapi.com/api/deck/${deck_id}/draw/?deck_count=1`);
   
           const cardJson = await cardPromise.json();
