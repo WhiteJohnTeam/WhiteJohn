@@ -13,6 +13,7 @@ import restartGame from "../redux/actions/restartGame";
 import { fetchAfterStand } from "../redux/thunks/dealerDrawUntilEnd";
 import CardItemList from "../components/cardItemList";
 import Card from "../classes/Card";
+import { delay } from "@reduxjs/toolkit/dist/utils";
 
 export default function PlayScreen({ navigation}) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -49,7 +50,7 @@ export default function PlayScreen({ navigation}) {
     try {
       // @ts-ignore
       await dispatch(fetchCard(PlayerType.Player, deckId));
-      //console.warn("what:", playerHand.length);
+
     } catch (error) {
       console.error("Error:", error);
     }
@@ -67,6 +68,7 @@ export default function PlayScreen({ navigation}) {
       await dispatch(restartGame())
        //@ts-ignore
       await dispatch(fetchFour(deckId));
+      setTimeout(() => {}, 5000);
     } catch (error) {
       console.error("Error:", error);
     }    
@@ -243,13 +245,8 @@ export default function PlayScreen({ navigation}) {
 
         {/* Display all of the player's cards */}
         <View style={styles.middle}>
-          <Text>Player: </Text>
-          {game.playerHand.map((card, index) => (
-            <Text key={index}>
-              {card.value} {card.suit}
-              {index < game.playerHand.length - 1 ? ", " : ""}
-            </Text>
-          ))}
+          <Text>Player:</Text>
+          <FlatList data={game.playerHand} renderItem={({item}) => <CardItemList items={[item]} />} />
         </View>
 
         <View style={styles.down}>
