@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
+import { Svg, SvgUri } from 'react-native-svg';
+
 import { fetchCard } from "../redux/thunks/fetchCard";
 import fetchDeck from "../redux/thunks/fetchDeck";
 import { PlayerType } from "../classes/PlayerType";
@@ -61,7 +63,7 @@ export default function PlayScreen({ navigation }) {
       setTimeout(() => {
         setShowModal(true);
         setShowAnimation(false);
-      }, 5000);
+      }, 3500);
     }
   }, [gameEnded]);
 
@@ -89,6 +91,16 @@ export default function PlayScreen({ navigation }) {
     }
   }
 
+  const renderCard = ({ item }) => {
+    if (!item || !item.image) {
+      return null;
+    }
+    const newImageUrl = item.image.replace(".svg", ".png");
+    return  <View>
+              <Image source={{uri: newImageUrl}} style={styles.card_image}/>
+            </View> 
+  };
+
   const styles = StyleSheet.create({
     play: {
       flex: 1,
@@ -112,6 +124,11 @@ export default function PlayScreen({ navigation }) {
       fontSize: 25,
       color: isDarkMode ? "white" : "#303030",
       maxWidth: global.width / 2 - 20,
+    },
+
+    card_image: {
+      width: 70,
+      height: 100,
     },
 
     middle: {
@@ -219,9 +236,8 @@ export default function PlayScreen({ navigation }) {
 
       <View style={styles.middle}>
         <Text>Dealer:</Text>
-        <FlatList data={game.dealerHand} renderItem={({ item }) => <CardItemList items={[item]} />} />
+        <CardItemList items={game.dealerHand} />
       </View>
-
 
       {/* Player's choices for each turn */}
       {/* HIT BUTTON * ----------------------------- */}
@@ -243,12 +259,14 @@ export default function PlayScreen({ navigation }) {
           <Text style={styles.text_choice}>STAND</Text>
         </TouchableOpacity>
       </View>
+      
 
       {/* Display all of the player's cards */}
       <View style={styles.middle}>
         <Text>Player:</Text>
-        <FlatList data={game.playerHand} renderItem={({ item }) => <CardItemList items={[item]} />} />
+        <CardItemList items={game.playerHand} />
       </View>
+      
 
       <View style={styles.down}>
         <Text style={styles.text_down}>YOUR HAND</Text>
