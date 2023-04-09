@@ -185,9 +185,9 @@ export default function PlayScreen({ navigation }) {
     },
     buttonContainer: {
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'space-evenly',
       marginTop: 20,
-      width: global.width / 2,
+      width: global.width / 1.3,
     },
     button: {
       borderRadius: 20,
@@ -216,12 +216,8 @@ export default function PlayScreen({ navigation }) {
     },
   });
 
-  //Rendre l'image de la carte très floue : blurRadius={10}
-
   return (
     <SafeAreaView style={styles.play}>
-      <Text>Deck id: {deckId}</Text>
-      <Text>Game ended: {gameEnded}</Text>
 
       <View style={styles.dealer}>
         <Image
@@ -245,7 +241,7 @@ export default function PlayScreen({ navigation }) {
           <Text style={styles.text_choice}>HIT</Text>
         </TouchableOpacity>
         {/* STAND BUTTON * ----------------------------- */}
-        <Text style={styles.text_middle}>Win Streak :</Text>
+        <Text></Text>
         <TouchableOpacity style={styles.choice}
           onPress={() =>
             Stand()

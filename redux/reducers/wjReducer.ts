@@ -144,23 +144,23 @@ export default wjReducer = (state = initialState, action) => {
             
             switch (true) {
                 case playerTotal > 21:
-                    console.warn("1");
+                    //console.warn("1");
                     return DealerWon(state, action.payload.dealerHand)
 
                 case delaerTotal > 21:
-                    console.warn("2");
+                    //console.warn("2");
                     return EndOfGame(state, PlayerType.Player);
 
                 case delaerTotal > playerTotal:
-                    console.warn("3");
+                    //console.warn("3");
                     return DealerWon(state, action.payload.dealerHand);
 
                 case playerTotal > delaerTotal:
-                    console.warn("4");
+                    //console.warn("4");
                     return EndOfGame(state, PlayerType.Player);
 
                 case playerTotal == delaerTotal:
-                    console.warn("5");
+                    //console.warn("5");
                     return EndOfGame(state, PlayerType.Player);
             }
 

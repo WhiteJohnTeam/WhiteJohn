@@ -183,15 +183,9 @@ export default function SettingsScreen({ navigation }) {
       fontSize: 20,
       marginBottom: 20,
     },
-    avatarRowModal: {
-      flexDirection: 'row',
-      justifyContent: 'space-evenly',
+    bodyModal: {
+      fontSize: 16,
       marginBottom: 20,
-    },
-    avatarModal: {
-      width: 80,
-      height: 80,
-      borderRadius: 40,
     },
     closeButtonModal: {
       backgroundColor: 'green',
@@ -226,15 +220,9 @@ export default function SettingsScreen({ navigation }) {
         transparent={true}
         visible={!showModal}>
           <View style={styles.modal}>
-            <Text style={styles.titleModal}>Our Dev Team</Text>
-            <View style={styles.avatarRowModal}>
-              <Image
-                style={styles.avatarModal}
-              />
-              <Image
-                style={styles.avatarModal}
-              />
-            </View>          
+            <Text style={styles.titleModal}>Our Dev Team</Text>         
+            <Text style={styles.bodyModal}>BRODA Lou - French Front Developer</Text>         
+            <Text style={styles.bodyModal}>FRANCO Nicolas - Brazilian Back Developer</Text>         
             <TouchableOpacity style={styles.closeButtonModal} onPress={() => {setShowModal(true)}}>
               <Text style={styles.closeTextModal}>X Close About Us</Text>
             </TouchableOpacity>
