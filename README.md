@@ -97,6 +97,35 @@ React Native also provides a **Context** API, which allows data to be passed dow
 
 Finally, to ensure the quality and stability of the app, React Native developers often write **tests** using frameworks like *Jest* and Enzyme. These tests can be used to test individual components, screen navigation, state management, and more, helping to catch bugs and issues early in the development process.   
 
+## Rating
+
+|**RATING CRITERIA**|
+|-----|-----|
+|Documentation|4pts|
+|-----|-----|
+|*Application sketches*|:heavy_check_mark:|
+|*ReadMe*|:heavy_check_mark:|
+|-----|-----|
+|Basics|10pts|
+|-----|-----|
+|*Navigation*|:heavy_check_mark:|
+|*Store*|:heavy_check_mark:|
+|*Actions -> Reducers*|:heavy_check_mark:|
+|*Display list of items*|:heavy_check_mark:|
+|*Display image*|:heavy_check_mark:|
+|*Child props*|:heavy_check_mark:|
+|*TextInput*|:heavy_check_mark:|
+|-----|-----|
+|Application features|6pts|
+|-----|-----|
+|*Wen API*|:heavy_check_mark:|
+|*Store favorite data*|:heavy_check_mark:|
+|*Tests*|:heavy_check_mark:|
+|-----|-----|
+|Bonus|4pts|
+|-----|-----|
+|*Dark/Light Mode*|:heavy_check_mark:|
+|*Sexy UI*|:interrobang:|
 
 *******
 
