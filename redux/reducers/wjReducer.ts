@@ -20,6 +20,10 @@ const initialState = {
     playerTotal: 0
 }
 
+/**
+ * Helper function to handle player win
+ */
+
 const EndOfGame = (state, player) => {
     console.warn("game ended");
     return {
@@ -29,6 +33,9 @@ const EndOfGame = (state, player) => {
     };
 }
 
+/**
+ * Helper function to handle dealer win
+ */
 const DealerWon = (state, newDealerHand) => {
     console.warn("dealer won");
     return {
@@ -37,6 +44,12 @@ const DealerWon = (state, newDealerHand) => {
         gameWinner: PlayerType.Dealer
     }
 }
+/**
+ * Reducer function for the game state
+ * @param {*} state Current state of the game
+ * @param {*} action Action dispatched to update the game state
+ * @returns {*} New state of the game after applying the action
+ */
   
   export default wjReducer = (state = initialState, action) => {
       switch (action.type) {
