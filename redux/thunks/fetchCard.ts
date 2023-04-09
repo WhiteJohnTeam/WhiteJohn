@@ -5,9 +5,7 @@ import drawCard from "../actions/drawCard";
 export const fetchCard = (who : PlayerType, deck_id: string) => {
     
     return async dispatch => {
-        try {
-            console.warn("fetch card started ...");
-            
+        try {            
             const cardPromise = await fetch(`https://www.deckofcardsapi.com/api/deck/${deck_id}/draw/?deck_count=1`);
           
             const cardJson = await cardPromise.json();

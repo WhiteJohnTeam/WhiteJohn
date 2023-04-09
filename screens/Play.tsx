@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import { ColorContext } from "../context/ColorContext";
 import { DealerContext } from "../context/DealerContext";
 import { useDispatch, useSelector } from "react-redux";
-import { Svg, SvgUri } from 'react-native-svg';
-
 import { fetchCard } from "../redux/thunks/fetchCard";
 import fetchDeck from "../redux/thunks/fetchDeck";
 import { PlayerType } from "../classes/PlayerType";
@@ -14,8 +12,6 @@ import Game from "../classes/Game";
 import restartGame from "../redux/actions/restartGame";
 import { fetchAfterStand } from "../redux/thunks/dealerDrawUntilEnd";
 import CardItemList from "../components/cardItemList";
-import Card from "../classes/Card";
-import { delay } from "@reduxjs/toolkit/dist/utils";
 
 export default function PlayScreen({ navigation }) {
   const { isDarkMode, toggleTheme } = useContext(ColorContext);
@@ -63,7 +59,7 @@ export default function PlayScreen({ navigation }) {
       setTimeout(() => {
         setShowModal(true);
         setShowAnimation(false);
-      }, 3500);
+      }, 1500);
     }
   }, [gameEnded]);
 
@@ -72,7 +68,7 @@ export default function PlayScreen({ navigation }) {
       await dispatch(restartGame())
       //@ts-ignore
       await dispatch(fetchFour(deckId));
-      setTimeout(() => { }, 3500);
+      setTimeout(() => { }, 2000);
     } catch (error) {
       console.error("Error:", error);
     }

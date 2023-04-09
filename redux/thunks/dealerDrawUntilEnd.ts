@@ -27,7 +27,6 @@ export const fetchAfterStand = (dealerHand: Card[], deck_id) => {
         dealerHand = [...dealerHand, newCard];
       }
       try {
-        console.warn(dealerHand)
         dispatch(playerStands(dealerHand, deck_id));
       } catch (error) {
         dispatch(apiRequestFailed(error))
