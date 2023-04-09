@@ -5,4 +5,4 @@ export const RESTART_GAME = 'RESTART_GAME';
 export const PLAYER_STANDS = 'PLAYER_STANDS';
 
 // Api failed ?
-export const FETCH_DECK_FAILED = 'FETCH_DECK_FAILED';
+export const API_REQUEST_FAILED = 'API_REQUEST_FAILED';

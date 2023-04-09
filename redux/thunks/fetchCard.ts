@@ -1,7 +1,9 @@
 import { PlayerType } from "../../classes/PlayerType";
+import { apiRequestFailed } from "../actions/apiRequestFailed";
 import drawCard from "../actions/drawCard";
 
 export const fetchCard = (who : PlayerType, deck_id: string) => {
+    
     return async dispatch => {
         try {
             console.log("fetch card started ...");
@@ -12,8 +14,7 @@ export const fetchCard = (who : PlayerType, deck_id: string) => {
             // check if success
             if(!cardJson.success) {
                 console.log("api request failed");
-                //throw new ApiError('There was an issue retrieving data from the API');
-                throw new Error("could not fetch data");
+                throw new Error("could not fetch data from the api");
             } else {
                 console.log("api request succeded");
             }
@@ -27,7 +28,8 @@ export const fetchCard = (who : PlayerType, deck_id: string) => {
               }
 
         } catch(error) {
-            //dispatch(fetchDeckFailed(error));
+            console.log(error)
+            dispatch(apiRequestFailed(error));
         }
     }
 }

@@ -1,3 +1,9 @@
+/*
+ * Represents a playing card with a numeric value and suit.
+ * The image is built from the suit and value, follwing the 
+ * api's link format.
+ */
+
 export default class Card {
   value: number;
   suit: string;

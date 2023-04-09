@@ -1,4 +1,7 @@
+import { apiRequestFailed } from "../actions/apiRequestFailed";
 import setDeck  from "../actions/setDeck";
+
+
 export default function fetchDeck () {
     return async dispatch => {
         try {
@@ -9,8 +12,7 @@ export default function fetchDeck () {
             // check if success
             if(!deckJson.success) {
                 console.warn("api request failed");
-                //throw new ApiError('There was an issue retrieving data from the API');
-                throw new Error("could not fetch data");
+                throw new Error("could not fetch data from the api");
             }            
             const {deck_id} = deckJson;
 
@@ -21,7 +23,7 @@ export default function fetchDeck () {
               }
 
         } catch(error) {
-            //dispatch(fetchDeckFailed(error));
+            dispatch(apiRequestFailed(error));
         }
     }
 }

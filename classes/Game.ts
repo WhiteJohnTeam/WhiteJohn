@@ -1,4 +1,9 @@
-import { useEffect, useState } from "react";
+/**
+ * Represents the game logic of blackjack. 
+ * The deckId is used to fetch the cards from the api, from a unique deck,
+ * leaving the deck's logic for the api to handle.
+ */
+
 import Card from "./Card";
 import { PlayerType } from "./PlayerType";
 

@@ -1,6 +1,6 @@
 import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
-import { DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
+import { API_REQUEST_FAILED, DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
 
 const initialState = {
     deckId: "",
@@ -8,6 +8,7 @@ const initialState = {
     dealerHand: [],
     gameWinner: PlayerType.Dealer,
     gameEnded: false,
+    error: new Error()
 }
 
 const EndOfGame = (state, player) => {
@@ -124,6 +125,12 @@ const DealerWon = (state, newDealerHand) => {
                     case playerTotal > delaerTotal:
                         return EndOfGame(state, PlayerType.Player);
                 }
+            
+            case API_REQUEST_FAILED:
+                return {
+                    ...state,
+                    error: action.payload
+                };
 
           default:
              

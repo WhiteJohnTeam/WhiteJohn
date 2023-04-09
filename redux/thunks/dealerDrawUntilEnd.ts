@@ -1,4 +1,5 @@
 import Card from "../../classes/Card";
+import { apiRequestFailed } from "../actions/apiRequestFailed";
 import playerStands from "../actions/playerStands";
 import { CalculateHandValue } from "../reducers/wjReducer";
 
@@ -13,7 +14,7 @@ export const fetchAfterStand = (dealerHand: Card[], deck_id) => {
           if (!cardJson.success) {
             console.log("api request failed");
             //throw new ApiError('There was an issue retrieving data from the API');
-            throw new Error("could not fetch data");
+            throw new Error("could not fetch data from the api");
           } else {
             console.log("api request succeded");
           }
@@ -29,7 +30,7 @@ export const fetchAfterStand = (dealerHand: Card[], deck_id) => {
         console.warn(dealerHand)
         dispatch(playerStands(dealerHand, deck_id));
       } catch (error) {
-        console.error(error);
+        dispatch(apiRequestFailed(error))
       }
     }
   }

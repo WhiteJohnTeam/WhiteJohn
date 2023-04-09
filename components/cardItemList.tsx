@@ -1,3 +1,8 @@
+/**
+ * Displays a list of cards. It is used to display 
+ * the player and dealer's hands.
+ */
+
 import Card from "../classes/Card";
 import { StyleSheet,  View, Image, FlatList } from "react-native";
 
