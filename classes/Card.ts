@@ -17,9 +17,9 @@ export default class Card {
 
   
   GetRealValue() : number {
-    if(this.value == "ACE")
+    if(this.value == "ACE" || this.value == "A")
       return 1;
-    else if(this.value == "KING" || this.value == "QUEEN" || this.value == "JACK")
+    else if(this.value == "KING" || this.value == "QUEEN" || this.value == "JACK" || this.value == "K" || this.value == "Q" || this.value == "J")
       return 10;
     return this.value;
   }

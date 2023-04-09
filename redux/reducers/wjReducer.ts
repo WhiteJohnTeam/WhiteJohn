@@ -1,6 +1,6 @@
 import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
-import { API_REQUEST_FAILED, DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
+import { DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
 
 const initialState = {
     deckId: "",
@@ -8,10 +8,11 @@ const initialState = {
     dealerHand: [],
     gameWinner: PlayerType.Dealer,
     gameEnded: false,
-    error: new Error()
+    playerTotal: 0
 }
 
 const EndOfGame = (state, player) => {
+    console.warn("game ended");
     return {
         ...state,
         gameEnded: true,
@@ -20,11 +21,11 @@ const EndOfGame = (state, player) => {
 }
 
 const DealerWon = (state, newDealerHand) => {
+    console.warn("dealer won");
     return {
         ...state,
-        dealerHand: newDealerHand,
-        gameWinner: PlayerType.Dealer,
-        gameEnded: true
+        delearHand: newDealerHand,
+        gameWinner: PlayerType.Dealer
     }
 }
   
@@ -44,6 +45,7 @@ const DealerWon = (state, newDealerHand) => {
 
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
 
+                console.warn("checking for win ? ", newHand);
                 if(CalculateHandValue(newHand) == 21) {
                     return EndOfGame(state, PlayerType.Player);
                 } else if(CalculateHandValue(newHand) > 21) {
@@ -57,6 +59,7 @@ const DealerWon = (state, newDealerHand) => {
                     };
                 } 
             } else {
+                console.warn("dealer draw")
                 let newHand = [...state.dealerHand];
                 newHand.push(new Card(action.payload.cardValue, action.payload.cardSuit));
             
@@ -74,6 +77,7 @@ const DealerWon = (state, newDealerHand) => {
             // Draw two cards for the player
             for (let i = 0; i < 2; i++) {
                 const { value, suit } = action.payload[i];
+                //console.warn("card: ", value)
                 newPlayerHand.push(new Card(value, suit));
             }
 
@@ -84,12 +88,17 @@ const DealerWon = (state, newDealerHand) => {
             }
 
             // now we calculate the initial scores to check for an early blackjack:
-            let playerScore = CalculateHandValue(newPlayerHand);
-            let dealerScore = CalculateHandValue(newDealerHand);
+            const playerScore = CalculateHandValue(newPlayerHand);
+            const dealerScore = CalculateHandValue(newDealerHand);
 
+            console.warn(playerScore, " ", dealerScore, "")
             // if the player has instant blackJack, the game ends
             if(playerScore == 21) {
+                console.warn("player has blackjack")
                return EndOfGame(state, PlayerType.Player)
+               
+            } else if(dealerScore == 21) {
+                return EndOfGame(state, PlayerType.Dealer)
             } else {
                 return {
                     ...state,
@@ -109,9 +118,10 @@ const DealerWon = (state, newDealerHand) => {
 
             case PLAYER_STANDS:  
 
+                console.warn("player stands");
+
                 let delaerTotal = CalculateHandValue(action.payload.dealerHand);
                 let playerTotal = CalculateHandValue([...state.playerHand]);
-
                 switch(true) {
                     case playerTotal > 21:
                         return DealerWon(state, action.payload.dealerHand)
@@ -124,16 +134,12 @@ const DealerWon = (state, newDealerHand) => {
 
                     case playerTotal > delaerTotal:
                         return EndOfGame(state, PlayerType.Player);
+                    
+                    case playerTotal == delaerTotal:
+                        return EndOfGame(state, PlayerType.Player);
                 }
-            
-            case API_REQUEST_FAILED:
-                return {
-                    ...state,
-                    error: action.payload
-                };
 
           default:
-             
               return state;
       }
   }
@@ -141,12 +147,13 @@ const DealerWon = (state, newDealerHand) => {
 /* FUNCTIONS TO HANDLE GAME LOGIC */
 
 export function CalculateHandValue (hand: Card[]): number{
-    let value = 0;
+    let value: number = 0;
     let hasAce = false;
 
     for (let card of hand) {
 
         // sommer la valeur de chaque carte
+        console.warn("real value: ",card.GetRealValue())
         value += Math.min(card.GetRealValue(), 10);
 
         // si carte c'est un ace set hasAce
@@ -159,6 +166,7 @@ export function CalculateHandValue (hand: Card[]): number{
         value += 10;
     }
 
+    console.warn("value: ", value);
     return value;
 }
 
