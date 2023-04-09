@@ -2,6 +2,15 @@ import Card from "../../classes/Card";
 import { PlayerType } from "../../classes/PlayerType";
 import { DRAW_CARD, PLAYER_STANDS, RESTART_GAME, SET_DECK, START_GAME } from "../constants"
 
+/**
+ * (note)
+ * j'ai essayer de faire des fonction et de les appeler dans le reducer
+ * pour faire plus propre. En faisant ça j'ai eu des problemes de mise a jour
+ * des vues et sans beacoup de temps restant j'ai decicder de laisser le reducer
+ * comme ça, mais je comprend qu'on aurait du factoriser le code en plusieurs
+ * fonctions.
+ */
+
 const initialState = {
     deckId: "",
     playerHand: [],
