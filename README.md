@@ -18,20 +18,33 @@ Sommaire
 
 <div id='acces'/>
 
-### Access right now the first version of your mobile application
+## Installation
 
-> **Warning** : Deploy not already done !   
+> :warning: Deployement done yet
 
-To start our project, you can download `master` branch on your laptop.   
-To start it you can just use the following command in your terminal : 
-> yarn expo start   
+1. Start cloning the repository 
+```
+https://codefirst.iut.uca.fr/git/WhiteJohn/WhiteJohn.git
+```   
+
+2. To start it you can just use the following command in your terminal : 
+```
+yarn expo start   
+```
+_You can use `npm` if that's your package manager of choice._
 
 *******
 <div id='progression'/>
 
-🚧  __IN PROGRESS__
+:white_check_mark:  __1st realease up to date__
 
 📆  _End of Project :_ 9 April 2023 
+
+---
+
+:construction: __New Features__
+
+📆 _Coming Soon..._
 
 *******
 
@@ -49,13 +62,13 @@ Whether you're a beginner or an experienced player, WhiteJohn is the perfect app
 
 <div id='contenu'/>
 
-## Functionalities
+## Features
 
-- BlackJack game :slot_machine:      
-- Informations about BlackJack game :book:   
-- Cheatsheet to learn the best moove :memo:
-- Dark Mode :moon:
-- Dealer Naming :man_office_worker:   
+- :slot_machine: BlackJack game      
+- :book: Informations about BlackJack game    
+- :memo: Cheatsheet to learn the best moove 
+- :moon: Dark Mode 
+- :man_office_worker: Name your dealer  
 
 
 ## Ressources
@@ -66,10 +79,9 @@ Whether you're a beginner or an experienced player, WhiteJohn is the perfect app
       
  ### Technology
 
-![](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)   
-![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)     
-![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)   
-    
+![](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)    
 
 *******
 
@@ -77,7 +89,7 @@ Whether you're a beginner or an experienced player, WhiteJohn is the perfect app
 
 ## Sketches
 
-[Maquettes](https://www.canva.com/design/DAFY2ryev9M/G4miZcC6bDw0IBEqXj71dw/view?utm_content=DAFY2ryev9M&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+[Sketches](https://www.canva.com/design/DAFY2ryev9M/G4miZcC6bDw0IBEqXj71dw/view?utm_content=DAFY2ryev9M&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
 
 ## Development
 
